@@ -351,6 +351,14 @@ const AdminPerfumeDetails = () => {
 
     const handleCancelImageEdit = () => setIsEditingImages(false);
 
+    const formattedNumber = (value) => {
+        if (value == null) return '';
+
+        return new Intl.NumberFormat(
+            i18n.language === 'ar' ? 'ar-JO' : 'en-US'
+        ).format(value);
+    };
+
     if (isLoading) {
         return (
             <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 50%, #EFEFEF 100%)', py: { xs: 2, sm: 3, md: 4 }, px: { xs: 1, sm: 2 } }}>
@@ -583,10 +591,10 @@ const AdminPerfumeDetails = () => {
                                                                         {t(`admin.perfume.detail.${price.perfumeSize}`)}
                                                                     </Typography>
                                                                     <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: { xs: '0.76rem', sm: '0.82rem', md: '0.88rem' } }}>
-                                                                        {price.price} {t('admin.perfume.detail.currency')}
+                                                                        {formattedNumber(price.price)} {t('admin.perfume.detail.currency')}
                                                                     </Typography>
                                                                     <Box sx={{ display: 'flex', gap: 0.6, alignItems: 'center' }}>
-                                                                        <Chip label={`${price.quantity} ${t('admin.perfume.detail.pieces')}`} size="small"
+                                                                        <Chip label={`${formattedNumber(price.quantity)} ${t('admin.perfume.detail.pieces')}`} size="small"
                                                                             sx={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.48)', fontSize: { xs: '0.6rem', sm: '0.64rem', md: '0.67rem' }, height: { xs: 18, sm: 20, md: 21 } }} />
                                                                         <Chip
                                                                             label={price.isActive ? t('admin.perfume.detail.available') : t('admin.perfume.detail.unavailable')}

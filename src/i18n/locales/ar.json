@@ -24,13 +24,27 @@
         "yes": "نعم",
         "no": "لا"
     },
+    "governorates": {
+        "AMMAN": "عمان",
+        "ZARQA": "الزرقاء",
+        "IRBID": "إربد",
+        "AQABA": "العقبة",
+        "MAFRAQ": "المفرق",
+        "KARAK": "الكرك",
+        "MADABA": "مادبا",
+        "AJLOUN": "عجلون",
+        "JERASH": "جرش",
+        "BALQA": "البلقاء",
+        "TAFILAH": "الطفيلة",
+        "MAAN": "معان"
+    },
     "auth": {
         "register": {
             "title": "تسجيل حساب العميل",
             "subtitle": "أنشئ حسابك للبدء باستخدام خدماتنا",
             "registerButton": "تسجيل",
             "registering": "جارٍ التسجيل...",
-            "passwordRequirements": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وحرف كبير، وحرف صغير، ورقم",
+            "passwordRequirements": "يجب أن تحتوي كلمة المرور على ٨ أحرف على الأقل، وحرف كبير، وحرف صغير، ورقم",
             "passwordsMismatch": "كلمتا المرور غير متطابقتين",
             "invalidPhone": "رقم الهاتف يجب أن يبدأ بـ 77 أو 78 أو 79 ويتكون من 9 أرقام",
             "invalidAlternativePhone": "رقم الهاتف البديل يجب أن يبدأ بـ 77 أو 78 أو 79 ويتكون من 9 أرقام",
@@ -76,7 +90,7 @@
             "resetting": "جاري إعادة التعيين...",
             "codeRequired": "كود التحقق مطلوب",
             "passwordRequired": "كلمة المرور الجديدة مطلوبة",
-            "passwordMinLength": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+            "passwordMinLength": "كلمة المرور يجب أن تكون ٨ أحرف على الأقل",
             "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
             "rememberPassword": "تتذكر كلمة المرور؟",
             "login": "تسجيل الدخول",
@@ -104,7 +118,7 @@
             "oldPasswordRequired": "يرجى إدخال كلمة المرور الحالية",
             "newPasswordRequired": "يرجى إدخال كلمة المرور الجديدة",
             "confirmPasswordRequired": "يرجى تأكيد كلمة المرور الجديدة",
-            "passwordMinLength": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+            "passwordMinLength": "كلمة المرور يجب أن تكون ٨ أحرف على الأقل",
             "passwordsNotMatch": "كلمة المرور الجديدة وتأكيدها غير متطابقين",
             "saving": "جاري الحفظ...",
             "saveNewPassword": "حفظ كلمة المرور الجديدة",
@@ -133,7 +147,7 @@
                 "percentage": "نسبة مئوية",
                 "fixed": "مبلغ ثابت",
                 "percentageOption": "نسبة مئوية (%)",
-                "fixedOption": "مبلغ ثابت (JD)"
+                "fixedOption": "مبلغ ثابت (د.أ)"
             },
             "empty": {
                 "title": "لا يوجد كوبون نشط حالياً",
@@ -145,10 +159,10 @@
                 "creating": "جاري الإنشاء...",
                 "discountTypePlaceholder": "اختر نوع الخصم",
                 "discountValuePlaceholder": {
-                    "percentage": "أدخل نسبة الخصم (1-100%)",
+                    "percentage": "أدخل نسبة الخصم (١-١٠٠%)",
                     "fixed": "أدخل مبلغ الخصم (دينار)"
                 },
-                "maxUsagePlaceholder": "100"
+                "maxUsagePlaceholder": "١٠٠"
             },
             "actions": {
                 "deactivate": "إلغاء تفعيل الكوبون",
@@ -157,7 +171,7 @@
             "validation": {
                 "selectDiscountType": "يرجى اختيار نوع الخصم",
                 "discountRequired": "يرجى إدخال قيمة الخصم",
-                "percentageRange": "النسبة يجب أن تكون بين 0.01 و 100",
+                "percentageRange": "النسبة يجب أن تكون بين ٠٫٠١ و ١٠٠",
                 "expiryRequired": "يرجى اختيار تاريخ الانتهاء",
                 "maxUsagePositive": "الحد الأقصى للاستخدام يجب أن يكون أكبر من صفر"
             },
@@ -223,8 +237,8 @@
                 "addSize": "إضافة حجم",
                 "sizePlaceholder": "الحجم",
                 "currency": "د.أ",
-                "50": "50 مل",
-                "100": "100 مل",
+                "50": "٥٠ مل",
+                "100": "١٠٠ مل",
                 "pricePlaceholder": "السعر",
                 "quantityPlaceholder": "الكمية",
                 "uploadImages": "رفع الصور",
@@ -262,8 +276,8 @@
                 "addSize": "إضافة حجم",
                 "size": "الحجم",
                 "price": "السعر",
-                "SIZE_50": "50 مل",
-                "SIZE_100": "100 مل",
+                "SIZE_50": "٥٠ مل",
+                "SIZE_100": "١٠٠ مل",
                 "quantity": "الكمية",
                 "note": "ملاحظة",
                 "price_note_label": "سبب تغيير السعر (اختياري)",
@@ -348,18 +362,21 @@
             "saveNewPassword": "حفظ كلمة المرور الجديدة"
         }
     },
-    "governorates": {
-        "AMMAN": "عمان",
-        "ZARQA": "الزرقاء",
-        "IRBID": "إربد",
-        "AQABA": "العقبة",
-        "MAFRAQ": "المفرق",
-        "KARAK": "الكرك",
-        "MADABA": "مادبا",
-        "AJLOUN": "عجلون",
-        "JERASH": "جرش",
-        "BALQA": "البلقاء",
-        "TAFILAH": "الطفيلة",
-        "MAAN": "معان"
+    "perfume": {
+        "collection": "مجموعة العطور",
+        "heroTitle": "عطور فاخرة",
+        "heroSubtitle": "اكتشف جوهر الأناقة",
+        "page": "صفحة",
+        "of": "من",
+        "perfumes": "عطور",
+        "searchResults": "نتائج البحث عن",
+        "noResults": "لم يتم العثور على أي عطور",
+        "tryDifferentFilters": "جرب كلمات بحث مختلفة",
+        "card": {
+            "available": "متوفر",
+            "startingFrom": "يبدأ من",
+            "currency": "د.أ",
+            "viewDetails": "عرض التفاصيل"
+        }
     }
 }

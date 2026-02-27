@@ -24,6 +24,20 @@
         "yes": "Yes",
         "no": "No"
     },
+    "governorates": {
+        "AMMAN": "Amman",
+        "ZARQA": "Zarqa",
+        "IRBID": "Irbid",
+        "AQABA": "Aqaba",
+        "MAFRAQ": "Mafraq",
+        "KARAK": "Karak",
+        "MADABA": "Madaba",
+        "AJLOUN": "Ajloun",
+        "JERASH": "Jerash",
+        "BALQA": "Balqa",
+        "TAFILAH": "Tafilah",
+        "MAAN": "Maan"
+    },
     "auth": {
         "register": {
             "title": "Customer Registration",
@@ -348,18 +362,21 @@
             "saveNewPassword": "Save New Password"
         }
     },
-    "governorates": {
-        "AMMAN": "Amman",
-        "ZARQA": "Zarqa",
-        "IRBID": "Irbid",
-        "AQABA": "Aqaba",
-        "MAFRAQ": "Mafraq",
-        "KARAK": "Karak",
-        "MADABA": "Madaba",
-        "AJLOUN": "Ajloun",
-        "JERASH": "Jerash",
-        "BALQA": "Balqa",
-        "TAFILAH": "Tafilah",
-        "MAAN": "Maan"
+    "perfume": {
+        "collection": "Perfume Collection",
+        "heroTitle": "Luxury Scents",
+        "heroSubtitle": "Discover the essence of elegance",
+        "page": "Page",
+        "of": "of",
+        "perfumes": "perfumes",
+        "searchResults": "Search results for",
+        "noResults": "No perfumes found",
+        "tryDifferentFilters": "Try different search terms",
+        "card": {
+            "available": "Available",
+            "startingFrom": "Starting from",
+            "currency": "JD",
+            "viewDetails": "View Details"
+        }
     }
 }

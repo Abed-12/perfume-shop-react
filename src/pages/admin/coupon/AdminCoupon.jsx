@@ -295,6 +295,14 @@ const AdminCoupon = () => {
         });
     }
 
+    const formattedDiscountValue = (value) => {
+        if (value == null) return '';
+
+        return new Intl.NumberFormat(
+            i18n.language === 'ar' ? 'ar-JO' : 'en-US'
+        ).format(value);
+    };
+
     // Render
     return (
         <Box
@@ -456,7 +464,7 @@ const AdminCoupon = () => {
                                                         {t('admin.coupon.fields.discountValue')}
                                                     </Typography>
                                                     <Typography sx={{ fontSize: '1.2rem', fontWeight: 700, color: '#D4AF37' }}>
-                                                        {activeCoupon.discountValue}
+                                                        {formattedDiscountValue(activeCoupon.discountValue)}
                                                         {activeCoupon.discountType === 'PERCENTAGE' ? '%' : t('admin.coupon.fields.currency')}
                                                     </Typography>
                                                 </Box>

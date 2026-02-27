@@ -20,6 +20,9 @@ import CustomerForgotPassword from "./pages/customer/auth/CustomerForgotPassword
 import CustomerResetPassword from "./pages/customer/auth/CustomerResetPassword";
 import CustomerProfile from "./pages/customer/profile/CustomerProfile";
 
+// Perfume Pages
+import Perfumes from "./pages/perfume/Perfumes";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -41,6 +44,10 @@ const App = () => {
         <Route path="/forgot-password" element={<CustomerForgotPassword />} />
         <Route path="/reset-password" element={<CustomerResetPassword />} />
         <Route path="/profile" element={<CustomerRoute><CustomerProfile /></CustomerRoute>} />
+
+        {/* Public */}
+        <Route path="/perfume" element={<Perfumes />} />
+        
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />

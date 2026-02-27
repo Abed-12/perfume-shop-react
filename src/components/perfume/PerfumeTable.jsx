@@ -47,6 +47,14 @@ const PerfumeTable = ({
     const { t, i18n } = useTranslation();
     const lang = i18n.language;
 
+    const formattedNumber = (value) => {
+        if (value == null) return '';
+
+        return new Intl.NumberFormat(
+            i18n.language === 'ar' ? 'ar-JO' : 'en-US'
+        ).format(value);
+    };
+
     return (
         <TableContainer
             component={Paper}
@@ -145,12 +153,12 @@ const PerfumeTable = ({
 
                                 {/* Lowest Price */}
                                 <TableCell align='center' sx={{ color: '#D4AF37', fontWeight: 600 }}>
-                                    {perfume.lowestPrice} {t('admin.perfume.table.currency')}
+                                    {formattedNumber(perfume.lowestPrice)} {t('admin.perfume.table.currency')}
                                 </TableCell>
 
                                 {/* Quantity */}
                                 <TableCell align='center' sx={{ color: '#fff' }}>
-                                    {perfume.quantity}
+                                    {formattedNumber(perfume.quantity)}
                                 </TableCell>
 
                                 {/* Status */}

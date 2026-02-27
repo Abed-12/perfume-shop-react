@@ -34,5 +34,5 @@ export const itemApi = baseApi.injectEndpoints({
 export const {
     useGetActivePerfumesQuery,
     useGetPerfumeByIdQuery,
-    useSearchPublicPerfumesQuery,
+    useLazySearchPublicPerfumesQuery
 } = itemApi;
