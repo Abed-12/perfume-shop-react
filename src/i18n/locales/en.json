@@ -378,5 +378,38 @@
             "currency": "JD",
             "viewDetails": "View Details"
         }
+    },
+    "perfumeDetails": {
+        "detailsLabel": "Perfume details",
+        "quantity": "Quantity",
+        "chooseSize": "Choose size",
+        "stock": "Stock",
+        "currency": "JD",
+        "addToCart": "Add to cart",
+        "selectSizeFirst": "Please select a size first",
+        "addedToCart": "Item added to cart successfully",
+        "notFound": "Perfume not found",
+        "backToList": "Back to perfumes",
+        "guestCouponHint": "You can order as guest, but coupon is available for logged-in users only.",
+        "typeLabel": "Perfume type",
+        "seasonsLabel": "Seasons",
+        "priceLabel": "Price",
+        "enums": {
+            "types": {
+                "FEMALE": "Female",
+                "MALE": "Male",
+                "UNISEX": "Unisex"
+            },
+            "seasons": {
+                "SPRING": "Spring",
+                "SUMMER": "Summer",
+                "FALL": "Fall",
+                "WINTER": "Winter"
+            },
+            "sizes": {
+                "SIZE_50": "50 ml",
+                "SIZE_100": "100 ml"
+            }
+        }
     }
 }

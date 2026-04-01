@@ -22,6 +22,7 @@ import CustomerProfile from "./pages/customer/profile/CustomerProfile";
 
 // Perfume Pages
 import Perfumes from "./pages/perfume/Perfumes";
+import PerfumeDetails from "./pages/perfume/PerfumeDetails";
 
 const App = () => {
   return (
@@ -47,7 +48,7 @@ const App = () => {
 
         {/* Public */}
         <Route path="/perfume" element={<Perfumes />} />
-        
+        <Route path="/perfume/:id" element={<PerfumeDetails />} />
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />

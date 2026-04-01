@@ -378,5 +378,38 @@
             "currency": "د.أ",
             "viewDetails": "عرض التفاصيل"
         }
+    },
+    "perfumeDetails": {
+        "detailsLabel": "تفاصيل العطر",
+        "quantity": "الكمية",
+        "chooseSize": "اختر الحجم",
+        "stock": "المخزون",
+        "currency": "د.أ",
+        "addToCart": "أضف إلى السلة",
+        "selectSizeFirst": "يرجى اختيار الحجم أولاً",
+        "addedToCart": "تمت إضافة المنتج إلى السلة بنجاح",
+        "notFound": "العطر غير موجود",
+        "backToList": "العودة إلى العطور",
+        "guestCouponHint": "يمكنك الطلب كزائر، لكن الكوبون متاح فقط للمستخدم المسجل.",
+        "typeLabel": "نوع العطر",
+        "seasonsLabel": "المواسم",
+        "priceLabel": "السعر",
+        "enums": {
+            "types": {
+                "FEMALE": "نسائي",
+                "MALE": "رجالي",
+                "UNISEX": "للجنسين"
+            },
+            "seasons": {
+                "SPRING": "الربيع",
+                "SUMMER": "الصيف",
+                "FALL": "الخريف",
+                "WINTER": "الشتاء"
+            },
+            "sizes": {
+                "SIZE_50": "50 مل",
+                "SIZE_100": "100 مل"
+            }
+        }
     }
 }

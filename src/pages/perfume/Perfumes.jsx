@@ -292,12 +292,18 @@ const Perfumes = () => {
                     '&::before': {
                         content: '""',
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundImage: 'radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.70) 0%, transparent 60%)',
-                    }
+                        inset: 0,
+                        pointerEvents: 'none',
+                        zIndex: 0,
+                        backgroundImage:
+                            'radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.70) 0%, transparent 60%)',
+                        transformOrigin: '50% 100%',
+                        animation: 'sunPulse 5s ease-in-out infinite',
+                        '@keyframes sunPulse': {
+                            '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
+                            '50%': { opacity: 1, transform: 'scale(1.20)' },
+                        },
+                    },
                 }}
             >
 

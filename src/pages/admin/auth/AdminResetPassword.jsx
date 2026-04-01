@@ -124,6 +124,7 @@ const AdminResetPassword = () => {
                     right: 0,
                     bottom: 0,
                     backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%)',
+                    pointerEvents: 'none'
                 }
             }}
         >

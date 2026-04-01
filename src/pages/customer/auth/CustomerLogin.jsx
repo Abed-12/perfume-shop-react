@@ -93,6 +93,7 @@ const CustomerLogin = () => {
           right: 0,
           bottom: 0,
           backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%)',
+          pointerEvents: 'none'
         }
       }}
     >
