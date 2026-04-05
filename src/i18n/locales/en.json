@@ -411,5 +411,16 @@
                 "SIZE_100": "100 ml"
             }
         }
+    },
+    "cart": {
+        "title": "Shopping cart",
+        "itemsCount": "{{count}} items",
+        "emptyTitle": "Your cart is empty",
+        "emptySubtitle": "Browse perfumes and add your favorites here",
+        "confirmOrder": "Confirm order",
+        "continueShopping": "Continue shopping",
+        "subtotal": "Subtotal",
+        "clear": "Clear cart",
+        "remove": "Remove item"
     }
 }

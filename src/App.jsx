@@ -24,6 +24,9 @@ import CustomerProfile from "./pages/customer/profile/CustomerProfile";
 import Perfumes from "./pages/perfume/Perfumes";
 import PerfumeDetails from "./pages/perfume/PerfumeDetails";
 
+// Order Pages
+import OrderConfirm from "./pages/order/OrderConfirm";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -36,8 +39,8 @@ const App = () => {
         <Route path="/admin-panel/reset-password" element={<AdminResetPassword />} />
         <Route path="/admin-panel/profile" element={<AdminRoute><AdminProfile /></AdminRoute>} />
         <Route path="/admin-panel/coupon" element={<AdminRoute><AdminCoupon /></AdminRoute>} />
-        <Route path="/admin-panel/perfume" element={<AdminRoute><AdminPerfumes /></AdminRoute>} />
-        <Route path="/admin-panel/perfume/:id" element={<AdminRoute><AdminPerfumeDetails /></AdminRoute>} />
+        <Route path="/admin-panel/perfumes" element={<AdminRoute><AdminPerfumes /></AdminRoute>} />
+        <Route path="/admin-panel/perfumes/:id" element={<AdminRoute><AdminPerfumeDetails /></AdminRoute>} />
 
         {/* Customer */}
         <Route path="/register" element={<CustomerRegister />} />
@@ -47,8 +50,9 @@ const App = () => {
         <Route path="/profile" element={<CustomerRoute><CustomerProfile /></CustomerRoute>} />
 
         {/* Public */}
-        <Route path="/perfume" element={<Perfumes />} />
-        <Route path="/perfume/:id" element={<PerfumeDetails />} />
+        <Route path="/perfumes" element={<Perfumes />} />
+        <Route path="/perfumes/:id" element={<PerfumeDetails />} />
+        <Route path="/order/confirm" element={<OrderConfirm />} />
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />

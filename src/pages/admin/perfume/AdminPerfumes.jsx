@@ -108,7 +108,7 @@ const AdminPerfumes = () => {
     };
 
     const handleView = (id) => {
-        navigate(`/admin-panel/perfume/${id}`);
+        navigate(`/admin-panel/perfumes/${id}`);
     };
 
     const handleCreateSuccess = () => {

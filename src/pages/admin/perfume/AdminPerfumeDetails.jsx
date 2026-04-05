@@ -388,7 +388,7 @@ const AdminPerfumeDetails = () => {
                         <Slide direction="down" in timeout={1000}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1, md: 1.5 }, my: { xs: 1.5, sm: 2, md: 3 } }}>
                                 <IconButton
-                                    onClick={() => navigate('/admin-panel/perfume')}
+                                    onClick={() => navigate('/admin-panel/perfumes')}
                                     size="small"
                                     sx={{
                                         color: '#000', padding: { xs: '4px', sm: '5px', md: '6px' }, transition: 'all 0.3s ease',

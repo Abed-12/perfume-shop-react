@@ -27,12 +27,18 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ShoppingIcon from '@mui/icons-material/LocalMall';
 import SpaIcon from '@mui/icons-material/Spa';
 import CloseIcon from '@mui/icons-material/Close';
+import Badge from '@mui/material/Badge';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import CartDrawer from './CartDrawer';
+import { selectCartCount } from '../redux/slices/cartSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const cartCount = useSelector(selectCartCount);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isRTL = i18n.language === 'ar';
@@ -66,7 +72,7 @@ const Navbar = () => {
       path: '/register',
       requiresAuth: false
     },
-    
+
     {
       text: t('navbar.login'),
       icon: <LoginIcon />,
@@ -88,7 +94,7 @@ const Navbar = () => {
       roles: ['ADMIN'],
       requiresAuth: true
     },
-    
+
     {
       text: t('navbar.profile'),
       icon: <PersonIcon />,
@@ -96,7 +102,7 @@ const Navbar = () => {
       roles: ['CUSTOMER'],
       requiresAuth: true
     },
-    
+
     {
       text: t('navbar.coupon'),
       icon: <LocalOfferIcon />,
@@ -107,8 +113,8 @@ const Navbar = () => {
 
     {
       text: t('navbar.perfume'),
-      icon: <SpaIcon  />,
-      path: '/admin-panel/perfume',
+      icon: <SpaIcon />,
+      path: '/admin-panel/perfumes',
       roles: ['ADMIN'],
       requiresAuth: true
     }
@@ -125,12 +131,12 @@ const Navbar = () => {
       role="presentation"
     >
       {/* Drawer Header */}
-      <Box sx={{ 
-        p: 1, 
+      <Box sx={{
+        p: 1,
         borderBottom: '2px solid rgba(212, 175, 55, 0.3)',
         background: 'rgba(212, 175, 55, 0.05)',
       }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Avatar
               sx={{
@@ -190,9 +196,9 @@ const Navbar = () => {
               button
               key={index}
               onClick={() => {
-                setDrawerOpen(false); 
-                if (item.action) item.action(); 
-                else navigate(item.path); 
+                setDrawerOpen(false);
+                if (item.action) item.action();
+                else navigate(item.path);
               }}
               sx={{
                 py: 0.5,
@@ -251,9 +257,9 @@ const Navbar = () => {
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar 
-            sx={{ 
-              justifyContent: 'space-between', 
+          <Toolbar
+            sx={{
+              justifyContent: 'space-between',
             }}
           >
             {/* Left Side - Always Menu Button on Mobile (Left in LTR) */}
@@ -351,27 +357,93 @@ const Navbar = () => {
               </Box>
             )}
 
-            {/* Right - Language Switcher */}
+            {/* Right - Cart + Language */}
             {!isMobile && (
-              <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <IconButton
+                  onClick={() => setCartOpen(true)}
+                  sx={{
+                    color: '#FFFFFF',
+                    borderRadius: '24px',
+                    transition: 'all 0.3s ease',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid transparent',
+                    '&:hover': {
+                      backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                      borderColor: '#D4AF37',
+                      transform: 'translateY(-3px)',
+                      boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
+                      color: '#D4AF37',
+                    },
+                    '&:active': {
+                      transform: 'translateY(0)',
+                    },
+                  }}
+                >
+                  <Badge
+                    badgeContent={cartCount}
+                    color="warning"
+                    sx={{
+                      '& .MuiBadge-badge': {
+                        bgcolor: '#D4AF37',
+                        color: '#000',
+                        fontWeight: 800,
+                      },
+                    }}
+                  >
+                    <ShoppingCartOutlinedIcon />
+                  </Badge>
+                </IconButton>
                 <LanguageSwitcher />
               </Box>
             )}
-            
-            {/* Spacer for mobile to center brand */}
-            {isMobile && <Box sx={{ width: 40 }} />}
+
+            {isMobile && (
+              <IconButton
+                onClick={() => setCartOpen(true)}
+                sx={{
+                  color: '#D4AF37',
+                  bgcolor: 'rgba(212, 175, 55, 0.1)',
+                  border: '1px solid rgba(212, 175, 55, 0.3)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(212, 175, 55, 0.2)',
+                    transform: 'scale(1.05)',
+                  },
+                  '&:active': {
+                    transform: 'scale(0.98)',
+                  },
+                }}
+              >
+                <Badge
+                  badgeContent={cartCount}
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      bgcolor: '#D4AF37',
+                      color: '#000',
+                      fontWeight: 800,
+                      fontSize: '0.65rem',
+                    },
+                  }}
+                >
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
 
       {/* Mobile Drawer - Always from left */}
       <Drawer
-        anchor= {isRTL ? "right" : "left"}
+        anchor={isRTL ? "right" : "left"}
         open={drawerOpen}
         onClose={toggleDrawer(false)}
       >
         {drawerContent}
       </Drawer>
+
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 };

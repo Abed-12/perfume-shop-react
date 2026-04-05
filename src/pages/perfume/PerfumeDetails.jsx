@@ -295,7 +295,7 @@ const PerfumeDetails = () => {
                             </Typography>
                             <Button
                                 variant="contained"
-                                onClick={() => navigate('/perfume')}
+                                onClick={() => navigate('/perfumes')}
                                 sx={{
                                     ...goldBtnSx,
                                     fontFamily: fontSans(isRTL),
@@ -328,7 +328,7 @@ const PerfumeDetails = () => {
                                 }}
                             >
                                 <IconButton
-                                    onClick={() => navigate('/perfume')}
+                                    onClick={() => navigate('/perfumes')}
                                     size="small"
                                     aria-label={t('perfumeDetails.backToList')}
                                     sx={{

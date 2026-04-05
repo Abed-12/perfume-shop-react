@@ -411,5 +411,16 @@
                 "SIZE_100": "100 مل"
             }
         }
+    },
+    "cart": {
+        "title": "سلة التسوق",
+        "itemsCount": "{{count}} منتج",
+        "emptyTitle": "سلتك فارغة",
+        "emptySubtitle": "تصفح العطور وأضف ما يعجبك إلى السلة",
+        "confirmOrder": "تأكيد الطلب",
+        "continueShopping": "متابعة التسوق",
+        "subtotal": "المجموع الفرعي",
+        "clear": "إفراغ السلة",
+        "remove": "إزالة المنتج"
     }
 }
