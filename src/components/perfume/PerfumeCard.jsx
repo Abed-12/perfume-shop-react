@@ -20,7 +20,7 @@ const PerfumeCard = ({ perfume, index }) => {
     };
 
     return (
-        <Zoom in timeout={index * 70}>
+        <Zoom in timeout={{ enter: index * 150 + 300 }}>
             <Box
                 onClick={() => navigate(`/perfumes/${perfume.id}`)}
                 sx={{

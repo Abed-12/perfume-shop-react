@@ -7,7 +7,11 @@
         "logout": "Logout",
         "profile": "Profile",
         "coupon": "Coupon",
-        "perfume": "Perfumes"
+        "perfume": "Perfumes",
+        "orders": "Orders",
+        "customers": "Customers",
+        "devices": "Devices",
+        "myOrders": "My Orders"
     },
     "footer": {
         "brandName": "Perfume Store",
@@ -22,7 +26,9 @@
     "common": {
         "actionCannotBeUndone": "This action cannot be undone",
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "cancel": "Cancel",
+        "loading": "Loading..."
     },
     "governorates": {
         "AMMAN": "Amman",
@@ -201,6 +207,9 @@
             },
             "filter": {
                 "searchPlaceholder": "Search perfume...",
+                "allStatus": "All Status",
+                "active": "Active",
+                "inactive": "Inactive",
                 "allTypes": "All Types",
                 "female": "Female",
                 "male": "Male",
@@ -322,6 +331,111 @@
                 "primary": "Primary",
                 "noImages": "No images available"
             }
+        },
+        "order": {
+            "title": "Manage",
+            "titleHighlight": "Orders",
+            "tab": {
+                "guest": "Guest Orders",
+                "customer": "Customer Orders"
+            },
+            "filter": {
+                "allStatus": "All Status"
+            },
+            "status": {
+                "PENDING": "Pending",
+                "PROCESSING": "Processing",
+                "DELIVERED": "Delivered",
+                "CANCELLED": "Cancelled"
+            },
+            "table": {
+                "orderNumber": "Order #",
+                "customerName": "Name",
+                "email": "Email",
+                "items": "Items",
+                "totalPrice": "Total",
+                "status": "Status",
+                "orderDate": "Date",
+                "actions": "Actions",
+                "currency": "JD",
+                "noResults": "No orders found",
+                "of": "of"
+            },
+            "detail": {
+                "pageTitle": "Order",
+                "pageTitleHighlight": "Details",
+                "title": "Order",
+                "notFound": "Order not found",
+                "guestOrder": "Guest Order",
+                "customerOrder": "Customer Order",
+                "customerInfo": "Customer Information",
+                "name": "Name",
+                "email": "Email",
+                "shippingInfo": "Shipping Information",
+                "phone": "Phone",
+                "altPhone": "Alternative Phone",
+                "governorate": "Governorate",
+                "address": "Address",
+                "orderInfo": "Order Information",
+                "orderDate": "Order Date",
+                "deliveredAt": "Delivered At",
+                "cancelledAt": "Cancelled At",
+                "cancellationReason": "Cancellation Reason",
+                "notes": "Notes",
+                "couponInfo": "Coupon Details",
+                "items": "Order Items",
+                "qty": "Qty",
+                "subtotal": "Subtotal",
+                "discount": "Discount",
+                "shippingFee": "Shipping Fee",
+                "total": "Total",
+                "startProcessing": "Start Processing",
+                "markDelivered": "Mark as Delivered",
+                "cancelOrder": "Cancel Order",
+                "startProcessingTitle": "Start Processing",
+                "startProcessingMessage": "Are you sure you want to move this order to processing?",
+                "markDeliveredTitle": "Mark as Delivered",
+                "markDeliveredMessage": "Are you sure you want to mark this order as delivered?",
+                "cancelOrderTitle": "Cancel Order",
+                "cancelOrderMessage": "Are you sure you want to cancel this order? This action cannot be undone.",
+                "confirmCancel": "Yes, Cancel Order",
+                "cancel": "Cancel",
+                "confirm": "Confirm",
+                "cancellationReasonPlaceholder": "Enter the reason for cancellation...",
+                "cancellationReasonRequired": "Cancellation reason is required.",
+                "statusUpdated": "Order status updated successfully.",
+                "statusSame": "Order already has this status.",
+                "transitionNotAllowed": "This status transition is not allowed.",
+                "cannotChange": "This order status cannot be changed.",
+                "statusUpdateError": "Failed to update order status."
+            }
+        },
+        "customer": {
+            "title": "Manage",
+            "titleHighlight": "Customers",
+            "searchPlaceholder": "Search by email...",
+            "noResults": "No customers found",
+            "table": {
+                "name": "Name",
+                "email": "Email",
+                "phone": "Phone",
+                "governorate": "Governorate",
+                "address": "Address"
+            }
+        },
+        "devices": {
+            "title": "Manage",
+            "titleHighlight": "Devices",
+            "noDevices": "No devices registered",
+            "removed": "Device removed successfully",
+            "removeError": "Failed to remove device",
+            "table": {
+                "name": "Device Name",
+                "type": "Type",
+                "registeredAt": "Registered At",
+                "actions": "Actions"
+            },
+            "remove": "Remove Device"
         }
     },
     "customer": {
@@ -360,6 +474,49 @@
             "newPassword": "New Password",
             "confirmPassword": "Confirm Password",
             "saveNewPassword": "Save New Password"
+        },
+        "orders": {
+            "title": "My",
+            "titleHighlight": "Orders",
+            "noResults": "No orders found",
+            "filter": {
+                "allTypes": "All Types"
+            },
+            "table": {
+                "orderNumber": "Order #",
+                "name": "Name",
+                "email": "Email",
+                "type": "Type",
+                "items": "Items",
+                "total": "Total",
+                "status": "Status",
+                "date": "Date",
+                "actions": "Actions"
+            },
+            "type": {
+                "GUEST": "Guest",
+                "CUSTOMER": "Customer"
+            },
+            "notFound": "Order not found",
+            "backToList": "Back to my orders",
+            "detail": {
+                "pageTitle": "Order",
+                "pageTitleHighlight": "Details",
+                "orderInfo": "Order Information",
+                "orderDate": "Order Date",
+                "governorate": "Governorate",
+                "phoneNumber": "Phone",
+                "address": "Address",
+                "shippingInfo": "Shipping Information",
+                "items": "Order Items",
+                "notes": "Notes",
+                "cancellationDetails": "Cancellation Details",
+                "deliveryDetails": "Delivery Details",
+                "subtotal": "Subtotal",
+                "discount": "Discount",
+                "shippingFee": "Shipping Fee",
+                "total": "Total"
+            }
         }
     },
     "perfume": {
@@ -388,6 +545,7 @@
         "addToCart": "Add to cart",
         "selectSizeFirst": "Please select a size first",
         "addedToCart": "Item added to cart successfully",
+        "exceedsStock": "Requested quantity exceeds available stock",
         "notFound": "Perfume not found",
         "backToList": "Back to perfumes",
         "guestCouponHint": "You can order as guest, but coupon is available for logged-in users only.",
@@ -422,5 +580,143 @@
         "subtotal": "Subtotal",
         "clear": "Clear cart",
         "remove": "Remove item"
+    },
+    "orderConfirm": {
+        "pageTitle": "Order Confirmation",
+        "guestSection": "Your Information",
+        "deliverySection": "Delivery Details",
+        "orderSummary": "Order Summary",
+        "pricing": "Pricing",
+        "couponSection": "Discount Coupon",
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "Enter your full name",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email",
+        "phoneNumber": "Phone Number",
+        "phoneNumberPlaceholder": "07xxxxxxxx",
+        "alternativePhone": "Alternative Phone (optional)",
+        "alternativePhonePlaceholder": "07xxxxxxxx",
+        "governorate": "Governorate",
+        "governoratePlaceholder": "Select governorate",
+        "address": "Detailed Address",
+        "addressPlaceholder": "e.g. Street name, building, apartment",
+        "notes": "Notes (optional)",
+        "notesPlaceholder": "e.g. Please call before delivery",
+        "couponCode": "Coupon Code",
+        "couponPlaceholder": "Enter coupon code",
+        "applyCoupon": "Apply",
+        "validating": "Validating...",
+        "couponApplied": "Coupon applied successfully",
+        "couponLoginHint": "Coupon is available for registered users only",
+        "loginToUseCoupon": "Login to use coupon",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "shippingFee": "Shipping Fee",
+        "total": "Total",
+        "currency": "JD",
+        "item": "item",
+        "items": "items",
+        "size": "Size",
+        "qty": "Qty",
+        "placeOrder": "Place Order",
+        "placingOrder": "Placing order...",
+        "emptyCart": "Your cart is empty",
+        "emptyCartMsg": "Add some perfumes to your cart first",
+        "shopNow": "Shop Now",
+        "orderNumberMissing": "Order was created, but the order number was not returned.",
+        "validation": {
+            "fullNameRequired": "Full name is required",
+            "emailRequired": "Email address is required",
+            "emailInvalid": "Invalid email address",
+            "phoneRequired": "Phone number is required",
+            "phoneInvalid": "Phone must start with 77, 78, or 79 and be 9 digits",
+            "altPhoneInvalid": "Alternative phone must start with 77, 78, or 79 and be 9 digits",
+            "phonesSame": "Alternative phone cannot be same as primary",
+            "governorateRequired": "Governorate is required",
+            "addressRequired": "Address is required"
+        },
+        "loggedInAs": "Welcome",
+        "guestOrder": "Guest Order",
+        "customerOrder": "Customer Order"
+    },
+    "orderSuccess": {
+        "title": "Order Placed",
+        "titleHighlight": "Successfully!",
+        "subtitle": "Thank you for your order",
+        "orderNumber": "Order Number",
+        "emailSent": "A confirmation email has been sent to",
+        "checkEmail": "Please check your email for order details",
+        "trackOrder": "Track Order",
+        "continueShopping": "Continue Shopping",
+        "orderDate": "Order Date",
+        "statusLabel": "Status",
+        "total": "Total",
+        "currency": "JD",
+        "loading": "Loading order details...",
+        "error": "Failed to load order details",
+        "retry": "Retry",
+        "status": {
+            "pending": "Pending",
+            "processing": "Processing",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        },
+        "backToHome": "Back to Home"
+    },
+    "trackOrder": {
+        "title": "Track Order",
+        "orderNumber": "Order Number",
+        "email": "Email",
+        "search": "Search",
+        "searchAgain": "Search Again",
+        "orderNotFound": "Order not found",
+        "guestInfo": "Guest Information",
+        "cancelOrder": "Cancel Order",
+        "cancelOrderTitle": "Confirm Cancel Order",
+        "cancelOrderMessage": "Are you sure you want to cancel this order?",
+        "confirmCancel": "Confirm Cancel",
+        "cancelReason": "Cancellation Reason",
+        "cancelReasonPlaceholder": "Please enter the reason for cancellation",
+        "canStillCancelTitle": "You can still cancel this order",
+        "canStillCancelSubtitle": "Order is pending and has not been processed yet",
+        "cancellationDetails": "Cancellation Details",
+        "cancellationReason": "Cancellation Reason",
+        "cancelledAt": "Cancelled At",
+        "deliveryDetails": "Delivery Details",
+        "deliveredAt": "Delivered At"
+    },
+    "notification": {
+        "title": "Notifications",
+        "empty": "No notifications yet",
+        "newNotification": "New notification",
+        "deleted": "Notification deleted",
+        "deleteError": "Failed to delete notification",
+        "clearedAll": "All notifications cleared",
+        "clearError": "Failed to clear notifications",
+        "clearAll": "Clear all",
+        "justNow": "Just now",
+        "minutesAgo": "{{count}}m ago",
+        "hoursAgo": "{{count}}h ago",
+        "daysAgo": "{{count}}d ago",
+        "count": "{{count}} notification(s)",
+        "emptyHint": "You're all caught up!",
+        "footerHint": "Pull down to refresh",
+        "settings": {
+            "title": "Notifications",
+            "pushNotifications": "Push Notifications",
+            "statusOn": "Enabled — you'll receive real-time alerts",
+            "statusOff": "Disabled — no alerts will be sent",
+            "enabled": "Notifications enabled successfully",
+            "disabled": "Notifications disabled",
+            "enableError": "Failed to enable notifications",
+            "disableError": "Failed to disable notifications",
+            "registeredDevices": "Registered Devices",
+            "noDevices": "No devices registered",
+            "removeDevice": "Remove device",
+            "deviceRemoved": "Device removed",
+            "removeDeviceError": "Failed to remove device",
+            "notSupported": "Push notifications are not supported in this browser",
+            "browserBlocked": "Notifications blocked by browser — click the lock icon in the address bar to enable"
+        }
     }
 }

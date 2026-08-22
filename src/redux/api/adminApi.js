@@ -141,11 +141,12 @@ export const adminApi = baseApi.injectEndpoints({
 
         // Perfume
         getAllPerfumes: builder.query({
-            query: ({ page = 0, size = 10, perfumeType, perfumeSeason }) => {
+            query: ({ page = 0, size = 10, perfumeType, perfumeSeason, active }) => {
                 const params = { page, size };
 
                 if (perfumeType) params.perfumeType = perfumeType;
                 if (perfumeSeason) params.perfumeSeason = perfumeSeason;
+                if (active !== undefined && active !== null) params.active = active;
 
                 return {
                     url: '/admin/perfumes',
@@ -155,10 +156,16 @@ export const adminApi = baseApi.injectEndpoints({
             providesTags: ['Perfumes']
         }),
         searchPerfumes: builder.query({
-            query: ({ page = 0, size = 10, keyword }) => ({
-                url: '/admin/perfumes/search',
-                params: { page, size, keyword }
-            }),
+            query: ({ page = 0, size = 10, keyword, active }) => {
+                const params = { page, size, keyword };
+
+                if (active !== undefined && active !== null) params.active = active;
+
+                return {
+                    url: '/admin/perfumes/search',
+                    params
+                };
+            },
             providesTags: ['Perfumes']
         }),
         createPerfume: builder.mutation({

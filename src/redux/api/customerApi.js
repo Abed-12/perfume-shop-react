@@ -50,11 +50,12 @@ export const customerApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['Orders']
         }),
-        getCustomerOrders: builder.query({
-            query: ({ page = 0, size = 10, status }) => {
+        getCustomerOrdersList: builder.query({
+            query: ({ page = 0, size = 10, status, orderType }) => {
                 const params = { page, size };
 
                 if (status) params.status = status;
+                if (orderType) params.orderType = orderType;
 
                 return {
                     url: '/customer/orders',
@@ -111,7 +112,7 @@ export const {
 
     // Orders
     useCreateCustomerOrderMutation,
-    useGetCustomerOrdersQuery,
+    useGetCustomerOrdersListQuery,
     useGetCustomerOrderByOrderNumberQuery,
     useCancelCustomerOrderMutation,
 

@@ -7,19 +7,21 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
+import CircularProgress from '@mui/material/CircularProgress';
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Fade ref={ref} {...props} />;
 });
 
-const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, cancelText }) => {
+const ConfirmationModal = ({ open, message, onConfirm, onCancel, onClose, confirmText, cancelText, title, loading, children }) => {
     const { t } = useTranslation();
+    const handleClose = onCancel || onClose;
 
     return (
         <Dialog
             open={open}
-            onClose={onCancel}
+            onClose={handleClose}
             TransitionComponent={Transition}
             maxWidth="sm"
             fullWidth
@@ -189,10 +191,24 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, ca
 
             {/* Content */}
             <DialogContent sx={{ pt: 0, pb: 2, px: 6, textAlign: 'center' }}>
+                {title && (
+                    <Typography
+                        sx={{
+                            fontSize: '1.3rem',
+                            fontWeight: 700,
+                            color: '#D4AF37',
+                            mb: 2,
+                            lineHeight: 1.3,
+                            textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+                        }}
+                    >
+                        {title}
+                    </Typography>
+                )}
                 <Typography
                     sx={{
-                        fontSize: '1.6rem',
-                        fontWeight: 700,
+                        fontSize: '1.2rem',
+                        fontWeight: 600,
                         color: '#ffffff',
                         mb: 2,
                         lineHeight: 1.3,
@@ -201,6 +217,7 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, ca
                 >
                     {message}
                 </Typography>
+                {children}
                 <Typography
                     sx={{
                         fontSize: '0.95rem',
@@ -224,7 +241,7 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, ca
                 }}
             >
                 <Button
-                    onClick={onCancel}
+                    onClick={handleClose}
                     sx={{
                         px: 5,
                         py: 1.8,
@@ -254,6 +271,7 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, ca
 
                 <Button
                     onClick={onConfirm}
+                    disabled={loading}
                     sx={{
                         px: 5,
                         py: 1.8,
@@ -289,10 +307,24 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, confirmText, ca
                         },
                         '&:active': {
                             transform: 'translateY(-1px)',
+                        },
+                        '&:disabled': {
+                            background: 'rgba(212, 175, 55, 0.3)',
+                            color: 'rgba(0, 0, 0, 0.5)',
+                            cursor: 'not-allowed',
+                            transform: 'none',
+                            boxShadow: 'none',
                         }
                     }}
                 >
-                    {confirmText || t('common.yes') || 'Yes'}
+                    {loading ? (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <CircularProgress size={20} sx={{ color: '#000' }} />
+                            {t('common.loading')}
+                        </Box>
+                    ) : (
+                        confirmText || t('common.yes') || 'Yes'
+                    )}
                 </Button>
             </DialogActions>
 

@@ -114,6 +114,7 @@ const INITIAL_FORM = {
 const CreatePerfumeDialog = ({ open, onClose, onSuccess }) => {
     const { t, i18n } = useTranslation();
     const isRTL = i18n.language === 'ar';
+    const fmtInt = (v) => new Intl.NumberFormat(isRTL ? 'ar-JO' : 'en-US').format(v);
 
     const [createPerfume, { isLoading }] = useCreatePerfumeMutation();
     const [formData, setFormData] = useState(INITIAL_FORM);
@@ -189,13 +190,13 @@ const CreatePerfumeDialog = ({ open, onClose, onSuccess }) => {
         setFormData(prev => {
             const remaining = MAX_IMAGES - prev.images.length;
             if (remaining <= 0) {
-                handleError(t('admin.perfume.create.maxImagesReached', { max: MAX_IMAGES }));
+                handleError(t('admin.perfume.create.maxImagesReached', { max: fmtInt(MAX_IMAGES) }));
                 return prev;
             }
 
             const toAdd = files.slice(0, remaining);
             if (files.length > remaining) {
-                handleError(t('admin.perfume.create.maxImagesReached', { max: MAX_IMAGES }));
+                handleError(t('admin.perfume.create.maxImagesReached', { max: fmtInt(MAX_IMAGES) }));
             }
 
             // max 25 MB
@@ -528,7 +529,7 @@ const CreatePerfumeDialog = ({ open, onClose, onSuccess }) => {
                         {formData.images.length > 0 && (
                             <Box sx={{ direction: 'ltr', display: 'flex', justifyContent: 'space-between', mt: 1, mx: 1 }}>
                                 <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-                                    {formData.images.length} / {MAX_IMAGES} {t('admin.perfume.create.images')}
+                                    {fmtInt(formData.images.length)} / {fmtInt(MAX_IMAGES)} {t('admin.perfume.create.images')}
                                 </Typography>
                                 <Typography sx={{
                                     fontSize: '0.75rem',

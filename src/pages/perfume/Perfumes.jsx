@@ -52,6 +52,8 @@ const PerfumeCardSkeleton = ({ index }) => (
 const LuxuryPagination = ({ totalPages, currentPage, onChange, isRTL, t }) => {
     if (totalPages <= 1) return null;
 
+    const fmtInt = (v) => new Intl.NumberFormat(isRTL ? 'ar-JO' : 'en-US').format(v);
+
     const getPageNumbers = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -161,7 +163,7 @@ const LuxuryPagination = ({ totalPages, currentPage, onChange, isRTL, t }) => {
                                         }),
                                 }}
                             >
-                                {p}
+                                {typeof p === 'number' ? fmtInt(p) : p}
                             </Box>
                         )
                     )}
@@ -184,7 +186,7 @@ const LuxuryPagination = ({ totalPages, currentPage, onChange, isRTL, t }) => {
                         color: 'rgba(0,0,0,0.8)',
                     }}
                 >
-                    {t('perfume.page')} {currentPage} {t('perfume.of')} {totalPages}
+                    {t('perfume.page')} {fmtInt(currentPage)} {t('perfume.of')} {fmtInt(totalPages)}
                 </Typography>
             </Box>
         </Fade>

@@ -21,7 +21,6 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ToastContainer } from 'react-toastify';
 import { handleSuccess, handleError } from '../../../utils/toastHelper';
 
 const CustomerResetPassword = () => {
@@ -416,8 +415,6 @@ const CustomerResetPassword = () => {
                     </Slide>
                 </Fade>
             </Container>
-
-            <ToastContainer />
         </Box>
     );
 };

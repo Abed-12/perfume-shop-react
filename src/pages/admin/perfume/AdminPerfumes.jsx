@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Fade from '@mui/material/Fade';
 import Slide from '@mui/material/Slide';
-import { ToastContainer } from 'react-toastify';
 import PerfumeFilters from '../../../components/perfume/PerfumeFilters';
 import PerfumeTable from '../../../components/perfume/PerfumeTable';
 import CreatePerfumeDialog from '../../../components/perfume/CreatePerfumeDialog';
@@ -47,6 +46,7 @@ const AdminPerfumes = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [perfumeType, setPerfumeType] = useState('');
     const [perfumeSeason, setPerfumeSeason] = useState('');
+    const [active, setActive] = useState('');
     const [createDialogOpen, setCreateDialogOpen] = useState(false);
 
     // API
@@ -55,7 +55,8 @@ const AdminPerfumes = () => {
             page,
             size: rowsPerPage,
             perfumeType: perfumeType || undefined,
-            perfumeSeason: perfumeSeason || undefined
+            perfumeSeason: perfumeSeason || undefined,
+            active: active !== '' ? active : undefined
         },
         { skip: searchTerm.length > 0 }
     );
@@ -72,7 +73,12 @@ const AdminPerfumes = () => {
         e.preventDefault();
         if (searchTerm.trim()) {
             setPage(0);
-            triggerSearch({ keyword: searchTerm, page: 0, size: rowsPerPage });
+            triggerSearch({
+                keyword: searchTerm,
+                page: 0,
+                size: rowsPerPage,
+                active: active !== '' ? active : undefined
+            });
         }
     };
 
@@ -91,10 +97,15 @@ const AdminPerfumes = () => {
         setPage(0);
     };
 
+    const handleActiveChange = (value) => {
+        setActive(value);
+        setPage(0);
+    };
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
         if (searchTerm) {
-            triggerSearch({ keyword: searchTerm, page: newPage, size: rowsPerPage });
+            triggerSearch({ keyword: searchTerm, page: newPage, size: rowsPerPage, active: active !== '' ? active : undefined });
         }
     };
 
@@ -103,7 +114,7 @@ const AdminPerfumes = () => {
         setRowsPerPage(newSize);
         setPage(0);
         if (searchTerm) {
-            triggerSearch({ keyword: searchTerm, page: 0, size: newSize });
+            triggerSearch({ keyword: searchTerm, page: 0, size: newSize, active: active !== '' ? active : undefined });
         }
     };
 
@@ -183,6 +194,8 @@ const AdminPerfumes = () => {
                                 onTypeChange={handleTypeChange}
                                 perfumeSeason={perfumeSeason}
                                 onSeasonChange={handleSeasonChange}
+                                active={active}
+                                onActiveChange={handleActiveChange}
                                 disabled={!!searchTerm}
                             />
                         </Box>
@@ -221,7 +234,6 @@ const AdminPerfumes = () => {
                 onSuccess={handleCreateSuccess}
             />
 
-            <ToastContainer />
         </Box>
     );
 };

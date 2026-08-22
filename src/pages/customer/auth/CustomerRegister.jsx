@@ -30,7 +30,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { ToastContainer } from "react-toastify";
 
 const GOVERNORATES = [
     "AMMAN",
@@ -741,8 +740,6 @@ const CustomerRegister = () => {
                     </Slide>
                 </Fade>
             </Container>
-
-            <ToastContainer />
         </Box>
     );
 };

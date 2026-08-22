@@ -11,7 +11,7 @@ export const orderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['Orders']
         }),
-        getGuestOrderDetails: builder.query({
+        trackGuestOrder: builder.query({
             query: ({ orderNumber, email }) => ({
                 url: '/public/guest-orders/track',
                 params: { email, orderNumber }
@@ -31,6 +31,6 @@ export const orderApi = baseApi.injectEndpoints({
 
 export const {
     useCreateGuestOrderMutation,
-    useGetGuestOrderDetailsQuery,
+    useTrackGuestOrderQuery,
     useCancelGuestOrderMutation
 } = orderApi;

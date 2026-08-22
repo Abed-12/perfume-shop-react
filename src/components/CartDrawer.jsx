@@ -10,6 +10,7 @@ import {
     selectCartTotal,
     updateCartItemQuantity,
 } from '../redux/slices/cartSlice';
+import { handleError } from '../utils/toastHelper';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -103,6 +104,12 @@ const CartDrawer = ({ open, onClose }) => {
 
     const handleQty = (item, delta) => {
         const next = item.quantity + delta;
+
+        if (delta > 0 && item.stock && next > item.stock) {
+            handleError(t('perfumeDetails.exceedsStock'));
+            return;
+        }
+
         dispatch(updateCartItemQuantity({ id: item.id, quantity: next }));
     };
 
@@ -188,7 +195,7 @@ const CartDrawer = ({ open, onClose }) => {
                             <Typography
                                 sx={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.8rem' }}
                             >
-                                {t('cart.itemsCount', { count })}
+                                {t('cart.itemsCount', { count: formattedNumber(count) })}
                             </Typography>
                         </Box>
                     </Box>
@@ -388,7 +395,7 @@ const CartDrawer = ({ open, onClose }) => {
                                                         fontSize: '0.85rem',
                                                     }}
                                                 >
-                                                    {item.quantity}
+                                                    {formattedNumber(item.quantity)}
                                                 </Typography>
                                                 <IconButton
                                                     size="small"

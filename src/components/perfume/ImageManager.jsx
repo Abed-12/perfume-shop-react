@@ -23,6 +23,7 @@ const ImageManager = ({
 }) => {
     const { t, i18n } = useTranslation();
     const isRTL = i18n.language === 'ar';
+    const fmtInt = (v) => new Intl.NumberFormat(isRTL ? 'ar-JO' : 'en-US').format(v);
 
     const replaceInputRef = useRef(null);
     const addInputRef = useRef(null);
@@ -254,7 +255,7 @@ const ImageManager = ({
                             onConfirm={() => confirmAddImage(index)}
                             onCancel={() => cancelAddImage(index)}
                             confirmLabel={t('admin.perfume.image.confirmAdd')}
-                            title={`🖼️ ${t('admin.perfume.image.newImageTitle')} ${index + 1}`}
+                            title={`🖼️ ${t('admin.perfume.image.newImageTitle')} ${fmtInt(index + 1)}`}
                         />
                     ))}
                     <Divider sx={{ borderColor: 'rgba(212,175,55,0.15)', my: { xs: 1.5, sm: 2, md: 2.5 } }} />
@@ -367,7 +368,7 @@ const ImageManager = ({
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     fontSize: { xs: '0.6rem', sm: '0.66rem', md: '0.72rem' }, fontWeight: 700,
                                 }}>
-                                    {index + 1}
+                                    {fmtInt(index + 1)}
                                 </Box>
 
                                 {image.isPrimary && (

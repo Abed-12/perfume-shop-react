@@ -51,6 +51,8 @@ const PerfumeFilters = ({
     onTypeChange,
     perfumeSeason,
     onSeasonChange,
+    active,
+    onActiveChange,
     disabled = false
 }) => {
     const { t } = useTranslation();
@@ -87,6 +89,28 @@ const PerfumeFilters = ({
                     }}
                 />
             </Box>
+
+            {/* Status Filter */}
+            {onActiveChange && (
+                <FormControl size="small" sx={{ minWidth: 150 }}>
+                    <Select
+                        value={active}
+                        onChange={(e) => onActiveChange(e.target.value)}
+                        displayEmpty
+                        sx={selectSx}
+                        MenuProps={menuProps}
+                    >
+                        <MenuItem value="">
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <FilterListIcon fontSize="small" />
+                                <span>{t('admin.perfume.filter.allStatus')}</span>
+                            </Box>
+                        </MenuItem>
+                        <MenuItem value="true">{t('admin.perfume.filter.active')}</MenuItem>
+                        <MenuItem value="false">{t('admin.perfume.filter.inactive')}</MenuItem>
+                    </Select>
+                </FormControl>
+            )}
 
             {/* Type Filter */}
             <FormControl size="small" sx={{ minWidth: 180 }}>

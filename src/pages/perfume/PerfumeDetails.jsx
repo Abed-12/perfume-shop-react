@@ -2,9 +2,8 @@ import { useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 import { useGetPerfumeByIdQuery } from '../../redux/api/itemApi';
-import { addToCart } from '../../redux/slices/cartSlice';
+import { addToCart, selectCartItems } from '../../redux/slices/cartSlice';
 import { selectIsAuthenticated } from '../../redux/slices/authSlice';
 import { handleSuccess, handleError } from '../../utils/toastHelper';
 import { Box } from '@mui/material';
@@ -135,6 +134,7 @@ const PerfumeDetails = () => {
     const { t, i18n } = useTranslation();
     const isRTL = i18n.language === 'ar';
     const isAuthenticated = useSelector(selectIsAuthenticated);
+    const cartItems = useSelector(selectCartItems);
 
     const { data, isLoading, isError } = useGetPerfumeByIdQuery(id);
     const perfume = data?.data;
@@ -195,6 +195,20 @@ const PerfumeDetails = () => {
             return;
         }
 
+        const existingItem = cartItems.find(
+            (item) =>
+                item.perfumeId === perfume.id &&
+                item.size === selectedSizeObject.size
+        );
+
+        const currentCartQty = existingItem ? existingItem.quantity : 0;
+        const totalQty = currentCartQty + qty;
+
+        if (totalQty > selectedSizeObject.quantity) {
+            handleError(t('perfumeDetails.exceedsStock'));
+            return;
+        }
+
         dispatch(
             addToCart({
                 id: `${perfume.id}-${selectedSizeObject.size}`,
@@ -205,6 +219,7 @@ const PerfumeDetails = () => {
                 size: selectedSizeObject.size,
                 price: selectedSizeObject.price,
                 quantity: qty,
+                stock: selectedSizeObject.quantity,
             })
         );
 
@@ -385,7 +400,7 @@ const PerfumeDetails = () => {
                                             {t('perfumeDetails.detailsLabel')}
                                         </Box>{' '}
                                         <Box component="span" sx={{ color: '#D4AF37' }}>
-                                            — {displayName}
+                                            - {displayName}
                                         </Box>
                                     </Typography>
                                     <Box sx={goldTitleUnderlineSx(isRTL)} />
@@ -410,8 +425,6 @@ const PerfumeDetails = () => {
                                         content: '""',
                                         position: 'absolute',
                                         inset: 0,
-                                        backgroundImage:
-                                            'radial-gradient(circle at 80% 15%, rgba(212,175,55,0.08) 0%, transparent 55%)',
                                         pointerEvents: 'none',
                                     }
                                 }}
@@ -423,6 +436,8 @@ const PerfumeDetails = () => {
                                             xs: '1fr',
                                             md: 'minmax(200px, 0.34fr) minmax(0, 1fr)',
                                         },
+                                         backgroundImage:
+                                            'radial-gradient(circle at 80% 15%, rgba(212,175,55,0.08) 0%, transparent 55%)',
                                         gap: { xs: 2, md: 3 },
                                         p: { xs: 2, sm: 2.5, md: 3.25 },
                                         direction: isRTL ? 'rtl' : 'ltr',
@@ -821,7 +836,7 @@ const PerfumeDetails = () => {
                                                             }}
                                                             component="span"
                                                         >
-                                                            {qty}
+                                                            {formattedNumber(qty)}
                                                         </Typography>
                                                         <IconButton
                                                             onClick={handleIncrease}
@@ -875,8 +890,6 @@ const PerfumeDetails = () => {
                     </Box>
                 </Fade>
             </Container>
-
-            <ToastContainer />
         </Box>
     );
 };

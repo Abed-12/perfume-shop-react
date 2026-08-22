@@ -33,7 +33,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { ToastContainer } from 'react-toastify';
 import { handleSuccess, handleError } from '../../../utils/toastHelper';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -1017,7 +1016,6 @@ const AdminCoupon = () => {
                 onClose={() => { }}
             />
 
-            <ToastContainer />
         </Box>
     );
 };

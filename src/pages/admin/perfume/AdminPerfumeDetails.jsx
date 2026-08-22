@@ -42,7 +42,6 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import TranslateIcon from '@mui/icons-material/Translate';
 import InputAdornment from '@mui/material/InputAdornment';
-import { ToastContainer } from 'react-toastify';
 import { handleSuccess, handleError } from '../../../utils/toastHelper';
 import ImageManager from '../../../components/perfume/ImageManager';
 
@@ -359,6 +358,8 @@ const AdminPerfumeDetails = () => {
         ).format(value);
     };
 
+    const displayName = perfume?.translatedName?.[i18n.language] || perfume?.name;
+
     if (isLoading) {
         return (
             <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 50%, #EFEFEF 100%)', py: { xs: 2, sm: 3, md: 4 }, px: { xs: 1, sm: 2 } }}>
@@ -409,7 +410,7 @@ const AdminPerfumeDetails = () => {
                                         fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
                                     }}>
                                         {t('admin.perfume.detail.details')}{' '}
-                                        <span style={{ color: '#D4AF37' }}>{perfume?.name}</span>
+                                        <span style={{ color: '#D4AF37' }}> - {displayName}</span>
                                     </Typography>
                                     <Box sx={{
                                         width: { xs: '100%', sm: isRTL ? 300 : 380, md: isRTL ? 400 : 500 },
@@ -463,7 +464,7 @@ const AdminPerfumeDetails = () => {
                                             lineHeight: 1.2,
                                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                                         }}>
-                                            {perfume?.name}
+                                            {displayName}
                                         </Typography>
                                         <Box sx={{ display: 'flex', gap: 0.6, mt: 0.5, flexWrap: 'wrap' }}>
                                             <Chip label={perfume?.brand} size="small"
@@ -868,8 +869,6 @@ const AdminPerfumeDetails = () => {
                     </Box>
                 </Fade>
             </Container>
-
-            <ToastContainer />
         </Box>
     );
 };

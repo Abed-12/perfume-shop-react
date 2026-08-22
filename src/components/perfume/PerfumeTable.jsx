@@ -216,7 +216,7 @@ const PerfumeTable = ({
                 onRowsPerPageChange={onRowsPerPageChange}
                 rowsPerPageOptions={[]}
                 labelDisplayedRows={({ from, to, count }) =>
-                    `${from}-${to} ${t('admin.perfume.table.of')} ${count}`
+                    `${formattedNumber(from)}-${formattedNumber(to)} ${t('admin.perfume.table.of')} ${formattedNumber(count)}`
                 }
                 sx={{
                     color: '#fff',

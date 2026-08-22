@@ -18,7 +18,6 @@ import Link from "@mui/material/Link";
 import Fade from "@mui/material/Fade";
 import Slide from "@mui/material/Slide";
 import EmailIcon from "@mui/icons-material/Email";
-import { ToastContainer } from "react-toastify";
 import { handleSuccess, handleError } from "../../../utils/toastHelper";
 
 const AdminForgotPassword = () => {
@@ -241,9 +240,6 @@ const AdminForgotPassword = () => {
                 </Slide>
             </Fade>
         </Container>
-
-        {/* Toast Messages */}
-        <ToastContainer />
         </Box>
     );
 };

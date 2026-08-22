@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCustomerLoginMutation } from '../../../redux/api/customerApi';
@@ -21,7 +21,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ToastContainer } from 'react-toastify';
 import { handleError } from '../../../utils/toastHelper';
 
 const CustomerLogin = () => {
@@ -29,6 +28,7 @@ const CustomerLogin = () => {
   const [login, { isLoading }] = useCustomerLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const isRTL = i18n.language === 'ar';
 
   const [formData, setFormData] = useState({
@@ -38,9 +38,13 @@ const CustomerLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const from = location.state?.from;
+  const redirectTo = from
+    ? `${from.pathname || '/perfumes'}${from.search || ''}${from.hash || ''}`
+    : '/perfumes';
 
   if (isAuthenticated) {
-    return <Navigate to="#" replace />;
+    return <Navigate to={redirectTo} replace />;
   }
 
   const handleInputChange = (e) => {
@@ -65,7 +69,7 @@ const CustomerLogin = () => {
         password: ''
       });
 
-      navigate('#', { replace: true });
+      navigate(redirectTo, { replace: true });
     } catch (error) {
       handleError(error?.data?.message);
     }
@@ -344,8 +348,6 @@ const CustomerLogin = () => {
           </Slide>
         </Fade>
       </Container>
-
-      <ToastContainer />
     </Box>
   );
 };

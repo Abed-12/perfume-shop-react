@@ -39,7 +39,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ToastContainer } from 'react-toastify';
 import { handleSuccess, handleError } from '../../../utils/toastHelper';
 
 
@@ -853,8 +852,6 @@ const CustomerProfile = () => {
                     </Box>
                 </DialogContent>
             </Dialog>
-
-            <ToastContainer />
         </Box>
     );
 };

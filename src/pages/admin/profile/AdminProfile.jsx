@@ -32,7 +32,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ToastContainer } from 'react-toastify';
 import { handleSuccess, handleError } from '../../../utils/toastHelper';
 
 // Shared Styles
@@ -561,8 +560,6 @@ const AdminProfile = () => {
                     </Box>
                 </DialogContent>
             </Dialog>
-
-            <ToastContainer />
         </Box>
     );
 };

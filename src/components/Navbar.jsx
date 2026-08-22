@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectIsAuthenticated, selectUserRole } from '../redux/slices/authSlice';
 import AppBar from '@mui/material/AppBar';
@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
@@ -17,6 +18,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
@@ -26,6 +28,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ShoppingIcon from '@mui/icons-material/LocalMall';
 import SpaIcon from '@mui/icons-material/Spa';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import GroupIcon from '@mui/icons-material/Group';
+import DevicesIcon from '@mui/icons-material/Devices';
 import CloseIcon from '@mui/icons-material/Close';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -33,19 +38,41 @@ import CartDrawer from './CartDrawer';
 import { selectCartCount } from '../redux/slices/cartSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
+import TrackOrderDialog from './TrackOrderDialog';
+import NotificationBell from './NotificationBell';
+import SearchIcon from '@mui/icons-material/Search';
 
-const Navbar = () => {
+const Navbar = ({ liveNotifications = [] }) => {
   const { t, i18n } = useTranslation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [trackOrderOpen, setTrackOrderOpen] = useState(false);
+  const [trackOrderParams, setTrackOrderParams] = useState(null);
   const cartCount = useSelector(selectCartCount);
+  const formattedCartCount = cartCount > 0 ? new Intl.NumberFormat(i18n.language === 'ar' ? 'ar-JO' : 'en-US').format(cartCount) : undefined;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isCompact = useMediaQuery(theme.breakpoints.down('lg'));
   const isRTL = i18n.language === 'ar';
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const userRole = useSelector(selectUserRole);
+  const [searchParams] = useSearchParams();
+
+  // Check for track order query params
+  useEffect(() => {
+    const shouldTrack = searchParams.get('trackOrder');
+    const orderNumber = searchParams.get('orderNumber');
+    const email = searchParams.get('email');
+    
+    if (shouldTrack === 'true' && orderNumber && email) {
+      setTrackOrderParams({ orderNumber, email });
+      setTrackOrderOpen(true);
+      // Clean up URL
+      navigate('/', { replace: true });
+    }
+  }, [searchParams, navigate]);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -67,24 +94,58 @@ const Navbar = () => {
     },
 
     {
-      text: t('navbar.register'),
-      icon: <PersonAddIcon />,
-      path: '/register',
-      requiresAuth: false
+      text: t('navbar.perfume'),
+      icon: <SpaIcon />,
+      path: '/perfumes',
+      excludeRoles: ['ADMIN']
     },
 
     {
-      text: t('navbar.login'),
-      icon: <LoginIcon />,
-      path: '/login',
-      requiresAuth: false
+      text: t('navbar.perfume'),
+      icon: <SpaIcon />,
+      path: '/admin-panel/perfumes',
+      roles: ['ADMIN'],
+      requiresAuth: true
     },
 
     {
-      text: t('navbar.logout'),
-      icon: <LogoutIcon />,
-      requiresAuth: true,
-      action: handleLogout
+      text: t('navbar.coupon'),
+      icon: <LocalOfferIcon />,
+      path: '/admin-panel/coupon',
+      roles: ['ADMIN'],
+      requiresAuth: true
+    },
+
+    {
+      text: t('navbar.orders'),
+      icon: <ReceiptLongIcon />,
+      path: '/admin-panel/orders',
+      roles: ['ADMIN'],
+      requiresAuth: true
+    },
+
+    {
+      text: t('navbar.customers'),
+      icon: <GroupIcon />,
+      path: '/admin-panel/customers',
+      roles: ['ADMIN'],
+      requiresAuth: true
+    },
+
+    {
+      text: t('navbar.devices'),
+      icon: <DevicesIcon />,
+      path: '/admin-panel/devices',
+      roles: ['ADMIN'],
+      requiresAuth: true
+    },
+
+    {
+      text: t('navbar.myOrders'),
+      icon: <ReceiptLongIcon />,
+      path: '/my-orders',
+      roles: ['CUSTOMER'],
+      requiresAuth: true
     },
 
     {
@@ -104,19 +165,24 @@ const Navbar = () => {
     },
 
     {
-      text: t('navbar.coupon'),
-      icon: <LocalOfferIcon />,
-      path: '/admin-panel/coupon',
-      roles: ['ADMIN'],
-      requiresAuth: true
+      text: t('navbar.register'),
+      icon: <PersonAddIcon />,
+      path: '/register',
+      requiresAuth: false
     },
 
     {
-      text: t('navbar.perfume'),
-      icon: <SpaIcon />,
-      path: '/admin-panel/perfumes',
-      roles: ['ADMIN'],
-      requiresAuth: true
+      text: t('navbar.login'),
+      icon: <LoginIcon />,
+      path: '/login',
+      requiresAuth: false
+    },
+
+    {
+      text: t('navbar.logout'),
+      icon: <LogoutIcon />,
+      requiresAuth: true,
+      action: handleLogout
     }
   ];
 
@@ -181,7 +247,13 @@ const Navbar = () => {
       </Box>
 
       {/* Menu Items */}
-      <List sx={{ flex: 1 }}>
+      <List sx={{
+        flex: 1,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        '&::-webkit-scrollbar': { display: 'none' },
+        scrollbarWidth: 'none',
+      }}>
         {menuItems
           .filter(item => {
             if (item.requiresAuth === true && !isAuthenticated) return false;
@@ -189,11 +261,12 @@ const Navbar = () => {
 
             if (item.roles && !item.roles.includes(userRole)) return false;
 
+            if (item.excludeRoles && item.excludeRoles.includes(userRole)) return false;
+
             return true;
           })
           .map((item, index) => (
-            <ListItem
-              button
+            <ListItemButton
               key={index}
               onClick={() => {
                 setDrawerOpen(false);
@@ -233,15 +306,15 @@ const Navbar = () => {
                   },
                 }}
               />
-            </ListItem>
+            </ListItemButton>
           ))}
       </List>
 
       <Divider sx={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
 
       {/* Language Switcher in Drawer */}
-      <Box sx={{ p: 0.5 }}>
-        <LanguageSwitcher />
+      <Box sx={{ p: 0.5, display: 'flex', justifyContent: 'center' }}>
+        <LanguageSwitcher isMobile={false} isDrawer />
       </Box>
     </Box>
   );
@@ -260,12 +333,16 @@ const Navbar = () => {
           <Toolbar
             sx={{
               justifyContent: 'space-between',
+              py: 0.75,
+              overflow: 'hidden',
+              minWidth: 0,
             }}
           >
             {/* Left Side - Always Menu Button on Mobile (Left in LTR) */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
               {isMobile && (
                 <IconButton
+                  size="small"
                   onClick={toggleDrawer(true)}
                   sx={{
                     color: '#D4AF37',
@@ -278,45 +355,42 @@ const Navbar = () => {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  <MenuIcon />
+                  <MenuIcon fontSize="small" />
                 </IconButton>
               )}
 
               {/* Brand */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
                 <Avatar
                   sx={{
                     bgcolor: '#D4AF37',
                     color: '#000000',
-                    width: { xs: 42, sm: 48 },
-                    height: { xs: 42, sm: 48 },
+                    width: { xs: 38, sm: 42 },
+                    height: { xs: 38, sm: 42 },
                     boxShadow: '0 4px 12px rgba(212, 175, 55, 0.4)',
                   }}
                 >
-                  <ShoppingIcon sx={{ fontSize: { xs: 16, sm: 20 } }} /> {/* edit: logo perfume */}
+                  <ShoppingIcon sx={{ fontSize: { xs: 16, sm: 20 } }} />
                 </Avatar>
-                <Box>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      color: '#D4AF37',
-                      fontWeight: 700,
-                      letterSpacing: '0.5px',
-                      fontSize: { xs: '1.1rem', sm: '1.3rem' },
-                      lineHeight: 1.2,
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
-                    }}
-                  >
-                    {t('navbar.brandName')}
-                  </Typography>
-                </Box>
+                <Typography
+                  component="div"
+                  sx={{
+                    color: '#D4AF37',
+                    fontWeight: 700,
+                    letterSpacing: '0.5px',
+                    fontSize: { xs: '1rem', sm: '1.1rem' },
+                    lineHeight: 1.2,
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                  }}
+                >
+                  {t('navbar.brandName')}
+                </Typography>
               </Box>
             </Box>
 
             {/* Center - Desktop Menu */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', gap: 0.5 }}>
+              <Box sx={{ display: 'flex', gap: 0.75 }}>
                 {menuItems
                   .filter(item => {
                     if (item.requiresAuth === true && !isAuthenticated) return false;
@@ -324,112 +398,123 @@ const Navbar = () => {
 
                     if (item.roles && !item.roles.includes(userRole)) return false;
 
+                    if (item.excludeRoles && item.excludeRoles.includes(userRole)) return false;
+
                     return true;
                   })
                   .map((item, index) => (
+                    <Tooltip title={item.text} key={index} arrow>
                     <IconButton
-                      key={index}
+                      size="small"
                       onClick={() => {
                         if (item.action) item.action();
                         else navigate(item.path);
                       }}
                       sx={{
                         color: '#FFFFFF',
-                        borderRadius: '24px',
+                        borderRadius: '22px',
                         transition: 'all 0.3s ease',
                         background: 'rgba(255, 255, 255, 0.05)',
                         border: '1px solid transparent',
+                        px: isCompact ? 0.75 : 1.25,
+                        py: 0.55,
+                        gap: isCompact ? 0 : 0.6,
                         '&:hover': {
                           backgroundColor: 'rgba(212, 175, 55, 0.15)',
                           borderColor: '#D4AF37',
-                          transform: 'translateY(-3px)',
+                          transform: 'translateY(-2px)',
                           boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
                           color: '#D4AF37',
                         },
                       }}
                     >
-                      {item.icon}
-                      <Typography sx={{ fontSize: '0.95rem', fontWeight: 600, mx: 0.5 }}>
-                        {item.text}
-                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { fontSize: 21 } }}>
+                        {item.icon}
+                      </Box>
+                      {!isCompact && (
+                        <Typography sx={{ fontSize: '0.825rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                          {item.text}
+                        </Typography>
+                      )}
                     </IconButton>
+                    </Tooltip>
                   ))}
               </Box>
             )}
 
-            {/* Right - Cart + Language */}
-            {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {/* Right - Notification + Track Order + Cart + Language */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+              {isAuthenticated && userRole === 'ADMIN' && (
+                <NotificationBell isRTL={isRTL} liveNotifications={liveNotifications} />
+              )}
+              {!isAuthenticated && (
+                <Tooltip title={t('trackOrder.title')} arrow>
+                  <IconButton
+                    size="small"
+                    onClick={() => setTrackOrderOpen(true)}
+                    sx={{
+                      color: '#FFFFFF',
+                      borderRadius: '22px',
+                      transition: 'all 0.3s ease',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid transparent',
+                      px: 0.75,
+                      py: 0.6,
+                      '&:hover': {
+                        backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                        borderColor: '#D4AF37',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
+                        color: '#D4AF37',
+                      },
+                    }}
+                  >
+                    <SearchIcon sx={{ fontSize: 22 }} />
+                  </IconButton>
+                </Tooltip>
+              )}
+              <Tooltip title={t('cart.title')} arrow>
                 <IconButton
+                  size="small"
                   onClick={() => setCartOpen(true)}
                   sx={{
                     color: '#FFFFFF',
-                    borderRadius: '24px',
+                    borderRadius: '22px',
                     transition: 'all 0.3s ease',
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid transparent',
+                    px: 0.75,
+                    py: 0.6,
                     '&:hover': {
                       backgroundColor: 'rgba(212, 175, 55, 0.15)',
                       borderColor: '#D4AF37',
-                      transform: 'translateY(-3px)',
+                      transform: 'translateY(-2px)',
                       boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
                       color: '#D4AF37',
-                    },
-                    '&:active': {
-                      transform: 'translateY(0)',
                     },
                   }}
                 >
                   <Badge
-                    badgeContent={cartCount}
+                    badgeContent={formattedCartCount}
                     color="warning"
                     sx={{
                       '& .MuiBadge-badge': {
                         bgcolor: '#D4AF37',
                         color: '#000',
                         fontWeight: 800,
+                        fontSize: '0.75rem',
+                        minWidth: 20,
+                        height: 20,
+                        padding: '0 4px',
                       },
                     }}
                   >
-                    <ShoppingCartOutlinedIcon />
+                    <ShoppingCartOutlinedIcon sx={{ fontSize: 22 }} />
                   </Badge>
                 </IconButton>
-                <LanguageSwitcher />
-              </Box>
-            )}
-
-            {isMobile && (
-              <IconButton
-                onClick={() => setCartOpen(true)}
-                sx={{
-                  color: '#D4AF37',
-                  bgcolor: 'rgba(212, 175, 55, 0.1)',
-                  border: '1px solid rgba(212, 175, 55, 0.3)',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    backgroundColor: 'rgba(212, 175, 55, 0.2)',
-                    transform: 'scale(1.05)',
-                  },
-                  '&:active': {
-                    transform: 'scale(0.98)',
-                  },
-                }}
-              >
-                <Badge
-                  badgeContent={cartCount}
-                  sx={{
-                    '& .MuiBadge-badge': {
-                      bgcolor: '#D4AF37',
-                      color: '#000',
-                      fontWeight: 800,
-                      fontSize: '0.65rem',
-                    },
-                  }}
-                >
-                  <ShoppingCartOutlinedIcon />
-                </Badge>
-              </IconButton>
-            )}
+              </Tooltip>
+              {!isMobile && <LanguageSwitcher isMobile={isMobile} />}
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
@@ -444,6 +529,16 @@ const Navbar = () => {
       </Drawer>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <TrackOrderDialog
+        key={trackOrderParams?.orderNumber || 'default'}
+        open={trackOrderOpen}
+        onClose={() => {
+          setTrackOrderOpen(false);
+          setTrackOrderParams(null);
+        }}
+        initialOrderNumber={trackOrderParams?.orderNumber}
+        initialEmail={trackOrderParams?.email}
+      />
     </>
   );
 };

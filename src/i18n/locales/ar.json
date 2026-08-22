@@ -7,7 +7,11 @@
         "logout": "تسجيل الخروج",
         "profile": "الملف الشخصي",
         "coupon": "الكوبون",
-        "perfume": "العطور"
+        "perfume": "العطور",
+        "orders": "الطلبات",
+        "customers": "العملاء",
+        "devices": "الأجهزة",
+        "myOrders": "طلباتي"
     },
     "footer": {
         "brandName": "متجر العطور",
@@ -22,7 +26,9 @@
     "common": {
         "actionCannotBeUndone": "لا يمكن التراجع عن هذا الإجراء",
         "yes": "نعم",
-        "no": "لا"
+        "no": "لا",
+        "cancel": "إلغاء",
+        "loading": "جاري التحميل..."
     },
     "governorates": {
         "AMMAN": "عمان",
@@ -201,6 +207,9 @@
             },
             "filter": {
                 "searchPlaceholder": "ابحث عن العطر...",
+                "allStatus": "جميع الحالات",
+                "active": "نشط",
+                "inactive": "غير نشط",
                 "allTypes": "جميع الأنواع",
                 "female": "نسائي",
                 "male": "رجالي",
@@ -322,6 +331,111 @@
                 "primary": "رئيسية",
                 "noImages": "لا توجد صور"
             }
+        },
+        "order": {
+            "title": "إدارة",
+            "titleHighlight": "الطلبات",
+            "tab": {
+                "guest": "طلبات الزوار",
+                "customer": "طلبات العملاء"
+            },
+            "filter": {
+                "allStatus": "جميع الحالات"
+            },
+            "status": {
+                "PENDING": "قيد الانتظار",
+                "PROCESSING": "قيد التحضير",
+                "DELIVERED": "تم التوصيل",
+                "CANCELLED": "ملغي"
+            },
+            "table": {
+                "orderNumber": "رقم الطلب",
+                "customerName": "الاسم",
+                "email": "البريد الإلكتروني",
+                "items": "المنتجات",
+                "totalPrice": "الإجمالي",
+                "status": "الحالة",
+                "orderDate": "التاريخ",
+                "actions": "الإجراءات",
+                "currency": "د.أ",
+                "noResults": "لا توجد طلبات",
+                "of": "من"
+            },
+            "detail": {
+                "pageTitle": "تفاصيل",
+                "pageTitleHighlight": "الطلب",
+                "title": "الطلب",
+                "notFound": "الطلب غير موجود",
+                "guestOrder": "طلب زائر",
+                "customerOrder": "طلب عميل",
+                "customerInfo": "بيانات العميل",
+                "name": "الاسم",
+                "email": "البريد الإلكتروني",
+                "shippingInfo": "بيانات الشحن",
+                "phone": "رقم الهاتف",
+                "altPhone": "رقم هاتف بديل",
+                "governorate": "المحافظة",
+                "address": "العنوان",
+                "orderInfo": "معلومات الطلب",
+                "orderDate": "تاريخ الطلب",
+                "deliveredAt": "تاريخ التوصيل",
+                "cancelledAt": "تاريخ الإلغاء",
+                "cancellationReason": "سبب الإلغاء",
+                "notes": "ملاحظات",
+                "couponInfo": "تفاصيل الكوبون",
+                "items": "منتجات الطلب",
+                "qty": "الكمية",
+                "subtotal": "المجموع الفرعي",
+                "discount": "الخصم",
+                "shippingFee": "رسوم التوصيل",
+                "total": "الإجمالي",
+                "startProcessing": "بدء المعالجة",
+                "markDelivered": "تم التوصيل",
+                "cancelOrder": "إلغاء الطلب",
+                "startProcessingTitle": "بدء المعالجة",
+                "startProcessingMessage": "هل أنت متأكد أنك تريد نقل هذا الطلب إلى قيد المعالجة؟",
+                "markDeliveredTitle": "تم التوصيل",
+                "markDeliveredMessage": "هل أنت متأكد أن هذا الطلب تم توصيله؟",
+                "cancelOrderTitle": "إلغاء الطلب",
+                "cancelOrderMessage": "هل أنت متأكد أنك تريد إلغاء هذا الطلب؟ لا يمكن التراجع عن هذا الإجراء.",
+                "confirmCancel": "نعم، إلغاء الطلب",
+                "cancel": "إلغاء",
+                "confirm": "تأكيد",
+                "cancellationReasonPlaceholder": "أدخل سبب الإلغاء...",
+                "cancellationReasonRequired": "سبب الإلغاء مطلوب.",
+                "statusUpdated": "تم تحديث حالة الطلب بنجاح.",
+                "statusSame": "الطلب لديه هذه الحالة بالفعل.",
+                "transitionNotAllowed": "هذا الانتقال غير مسموح به.",
+                "cannotChange": "لا يمكن تغيير حالة هذا الطلب.",
+                "statusUpdateError": "فشل تحديث حالة الطلب."
+            }
+        },
+        "customer": {
+            "title": "إدارة",
+            "titleHighlight": "العملاء",
+            "searchPlaceholder": "ابحث عن البريد الإلكتروني...",
+            "noResults": "لا يوجد عملاء",
+            "table": {
+                "name": "الاسم",
+                "email": "البريد الإلكتروني",
+                "phone": "الهاتف",
+                "governorate": "المحافظة",
+                "address": "العنوان"
+            }
+        },
+        "devices": {
+            "title": "إدارة",
+            "titleHighlight": "الأجهزة",
+            "noDevices": "لا توجد أجهزة مسجلة",
+            "removed": "تم حذف الجهاز بنجاح",
+            "removeError": "فشل في حذف الجهاز",
+            "table": {
+                "name": "اسم الجهاز",
+                "type": "النوع",
+                "registeredAt": "تاريخ التسجيل",
+                "actions": "الإجراءات"
+            },
+            "remove": "حذف الجهاز"
         }
     },
     "customer": {
@@ -360,6 +474,49 @@
             "newPassword": "كلمة المرور الجديدة",
             "confirmPassword": "تأكيد كلمة المرور",
             "saveNewPassword": "حفظ كلمة المرور الجديدة"
+        },
+        "orders": {
+            "title": "طلباتي",
+            "titleHighlight": "الطلبات",
+            "noResults": "لا توجد طلبات",
+            "filter": {
+                "allTypes": "كل الأنواع"
+            },
+            "table": {
+                "orderNumber": "رقم الطلب",
+                "name": "الاسم",
+                "email": "البريد الإلكتروني",
+                "type": "النوع",
+                "items": "المنتجات",
+                "total": "الإجمالي",
+                "status": "الحالة",
+                "date": "التاريخ",
+                "actions": "إجراءات"
+            },
+            "type": {
+                "GUEST": "زائر",
+                "CUSTOMER": "عميل"
+            },
+            "notFound": "الطلب غير موجود",
+            "backToList": "العودة إلى طلباتي",
+            "detail": {
+                "pageTitle": "تفاصيل",
+                "pageTitleHighlight": "الطلب",
+                "orderInfo": "معلومات الطلب",
+                "orderDate": "تاريخ الطلب",
+                "governorate": "المحافظة",
+                "phoneNumber": "الهاتف",
+                "address": "العنوان",
+                "shippingInfo": "معلومات التوصيل",
+                "items": "منتجات الطلب",
+                "notes": "ملاحظات",
+                "cancellationDetails": "تفاصيل الإلغاء",
+                "deliveryDetails": "تفاصيل التوصيل",
+                "subtotal": "المجموع الفرعي",
+                "discount": "الخصم",
+                "shippingFee": "رسوم التوصيل",
+                "total": "الإجمالي"
+            }
         }
     },
     "perfume": {
@@ -388,6 +545,7 @@
         "addToCart": "أضف إلى السلة",
         "selectSizeFirst": "يرجى اختيار الحجم أولاً",
         "addedToCart": "تمت إضافة المنتج إلى السلة بنجاح",
+        "exceedsStock": "الكمية المطلوبة تتجاوز المخزون المتوفر",
         "notFound": "العطر غير موجود",
         "backToList": "العودة إلى العطور",
         "guestCouponHint": "يمكنك الطلب كزائر، لكن الكوبون متاح فقط للمستخدم المسجل.",
@@ -407,8 +565,8 @@
                 "WINTER": "الشتاء"
             },
             "sizes": {
-                "SIZE_50": "50 مل",
-                "SIZE_100": "100 مل"
+                "SIZE_50": "٥٠ مل",
+                "SIZE_100": "١٠٠ مل"
             }
         }
     },
@@ -422,5 +580,143 @@
         "subtotal": "المجموع الفرعي",
         "clear": "إفراغ السلة",
         "remove": "إزالة المنتج"
+    },
+    "orderConfirm": {
+        "pageTitle": "تأكيد الطلب",
+        "guestSection": "بيانات الزائر",
+        "deliverySection": "بيانات التوصيل",
+        "orderSummary": "ملخص الطلب",
+        "pricing": "التسعير",
+        "couponSection": "كوبون الخصم",
+        "fullName": "الاسم الكامل",
+        "fullNamePlaceholder": "أدخل اسمك الكامل",
+        "email": "البريد الإلكتروني",
+        "emailPlaceholder": "أدخل بريدك الإلكتروني",
+        "phoneNumber": "رقم الهاتف",
+        "phoneNumberPlaceholder": "07xxxxxxxx",
+        "alternativePhone": "رقم هاتف بديل (اختياري)",
+        "alternativePhonePlaceholder": "07xxxxxxxx",
+        "governorate": "المحافظة",
+        "governoratePlaceholder": "اختر المحافظة",
+        "address": "العنوان التفصيلي",
+        "addressPlaceholder": "مثال: شارع المدينة المنورة، عمارة 25، شقة 3",
+        "notes": "ملاحظات (اختيارية)",
+        "notesPlaceholder": "مثال: الرجاء الاتصال قبل التوصيل",
+        "couponCode": "كود الكوبون",
+        "couponPlaceholder": "أدخل كود الكوبون",
+        "applyCoupon": "تطبيق",
+        "validating": "جارٍ التحقق...",
+        "couponApplied": "تم تطبيق الكوبون بنجاح",
+        "couponLoginHint": "الكوبون متاح للمستخدمين المسجلين فقط",
+        "loginToUseCoupon": "سجّل دخولك لاستخدام الكوبون",
+        "subtotal": "المجموع الفرعي",
+        "discount": "الخصم",
+        "shippingFee": "رسوم التوصيل",
+        "total": "الإجمالي",
+        "currency": "د.أ",
+        "item": "منتج",
+        "items": "منتجات",
+        "size": "الحجم",
+        "qty": "الكمية",
+        "placeOrder": "إتمام الطلب",
+        "placingOrder": "جارٍ تنفيذ الطلب...",
+        "emptyCart": "سلتك فارغة",
+        "emptyCartMsg": "أضف بعض العطور إلى سلتك أولاً",
+        "shopNow": "تسوق الآن",
+        "orderNumberMissing": "تم إنشاء الطلب، لكن رقم الطلب لم يرجع من الخادم.",
+        "validation": {
+            "fullNameRequired": "الاسم الكامل مطلوب",
+            "emailRequired": "البريد الإلكتروني مطلوب",
+            "emailInvalid": "البريد الإلكتروني غير صالح",
+            "phoneRequired": "رقم الهاتف مطلوب",
+            "phoneInvalid": "رقم الهاتف يجب أن يبدأ بـ 77 أو 78 أو 79 ويتكون من 9 أرقام",
+            "altPhoneInvalid": "رقم الهاتف البديل يجب أن يبدأ بـ 77 أو 78 أو 79 ويتكون من 9 أرقام",
+            "phonesSame": "رقم الهاتف البديل لا يمكن أن يكون نفس الرقم الأساسي",
+            "governorateRequired": "المحافظة مطلوبة",
+            "addressRequired": "العنوان مطلوب"
+        },
+        "loggedInAs": "مرحباً",
+        "guestOrder": "طلب كزائر",
+        "customerOrder": "طلب كعميل"
+    },
+    "orderSuccess": {
+        "title": "تم تنفيذ الطلب",
+        "titleHighlight": "بنجاح!",
+        "subtitle": "شكراً لطلبك",
+        "orderNumber": "رقم الطلب",
+        "emailSent": "تم إرسال رسالة تأكيد إلى",
+        "checkEmail": "يرجى التحقق من بريدك الإلكتروني للحصول على تفاصيل الطلب",
+        "trackOrder": "تتبع الطلب",
+        "continueShopping": "متابعة التسوق",
+        "orderDate": "تاريخ الطلب",
+        "statusLabel": "الحالة",
+        "total": "الإجمالي",
+        "currency": "د.أ",
+        "loading": "جاري تحميل تفاصيل الطلب...",
+        "error": "فشل في تحميل تفاصيل الطلب",
+        "retry": "إعادة المحاولة",
+        "status": {
+            "pending": "قيد الانتظار",
+            "processing": "قيد التحضير",
+            "delivered": "تم التوصيل",
+            "cancelled": "ملغي"
+        },
+        "backToHome": "العودة للرئيسية"
+    },
+    "trackOrder": {
+        "title": "تتبع الطلب",
+        "orderNumber": "رقم الطلب",
+        "email": "البريد الإلكتروني",
+        "search": "بحث",
+        "searchAgain": "بحث مرة أخرى",
+        "orderNotFound": "الطلب غير موجود",
+        "guestInfo": "معلومات الزائر",
+        "cancelOrder": "إلغاء الطلب",
+        "cancelOrderTitle": "تأكيد إلغاء الطلب",
+        "cancelOrderMessage": "هل أنت متأكد من إلغاء هذا الطلب؟",
+        "confirmCancel": "تأكيد الإلغاء",
+        "cancelReason": "سبب الإلغاء",
+        "cancelReasonPlaceholder": "يرجى إدخال سبب إلغاء الطلب",
+        "canStillCancelTitle": "لا يزال بإمكانك إلغاء هذا الطلب",
+        "canStillCancelSubtitle": "الطلب قيد الانتظار ولم تتم معالجته بعد",
+        "cancellationDetails": "تفاصيل الإلغاء",
+        "cancellationReason": "سبب الإلغاء",
+        "cancelledAt": "تاريخ الإلغاء",
+        "deliveryDetails": "تفاصيل التوصيل",
+        "deliveredAt": "تاريخ التوصيل"
+    },
+    "notification": {
+        "title": "الإشعارات",
+        "empty": "لا توجد إشعارات بعد",
+        "newNotification": "إشعار جديد",
+        "deleted": "تم حذف الإشعار",
+        "deleteError": "فشل في حذف الإشعار",
+        "clearedAll": "تم مسح جميع الإشعارات",
+        "clearError": "فشل في مسح الإشعارات",
+        "clearAll": "مسح الكل",
+        "justNow": "الآن",
+        "minutesAgo": "منذ {{count}} د",
+        "hoursAgo": "منذ {{count}} س",
+        "daysAgo": "منذ {{count}} ي",
+        "count": "{{count}} إشعار(إشعارات)",
+        "emptyHint": "كل شيء محدّث!",
+        "footerHint": "اسحب للأسفل للتحديث",
+        "settings": {
+            "title": "الإشعارات",
+            "pushNotifications": "إشعارات الفورية",
+            "statusOn": "مفعّل — ستتلقى تنبيهات فورية",
+            "statusOff": "معطّل — لن يتم إرسال تنبيهات",
+            "enabled": "تم تفعيل الإشعارات بنجاح",
+            "disabled": "تم تعطيل الإشعارات",
+            "enableError": "فشل في تفعيل الإشعارات",
+            "disableError": "فشل في تعطيل الإشعارات",
+            "registeredDevices": "الأجهزة المسجلة",
+            "noDevices": "لا توجد أجهزة مسجلة",
+            "removeDevice": "إزالة الجهاز",
+            "deviceRemoved": "تم إزالة الجهاز",
+            "removeDeviceError": "فشل في إزالة الجهاز",
+            "notSupported": "إشعارات الفورية غير مدعومة في هذا المتصفح",
+            "browserBlocked": "المتصفح حجب الإشعارات — اضغط على أيقونة القفل في شريط العنوان لتفعيلها"
+        }
     }
 }
