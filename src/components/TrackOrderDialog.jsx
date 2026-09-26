@@ -230,6 +230,7 @@ const TrackOrderDialog = ({ open, onClose, initialOrderNumber = null, initialEma
                 onClose={onClose}
                 maxWidth="md"
                 fullWidth
+                disableScrollLock
                 PaperProps={{
                     sx: {
                         borderRadius: 4,

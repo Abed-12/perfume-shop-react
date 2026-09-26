@@ -57,16 +57,33 @@ const goldBtnSx = {
     fontSize: '0.95rem',
     background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)',
     color: '#000',
-    boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
+    boxShadow: '0 6px 30px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
     transition: 'all 0.3s',
+    position: 'relative',
+    overflow: 'hidden',
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: '-100%',
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent)',
+        transition: 'left 0.7s',
+    },
     '&:hover': {
         background: 'linear-gradient(135deg, #F4D03F 0%, #D4AF37 100%)',
         transform: 'translateY(-2px)',
-        boxShadow: '0 6px 20px rgba(212,175,55,0.4)',
+        boxShadow: '0 8px 35px rgba(212, 175, 55, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+        '&::before': { left: '100%' },
     },
+    '&:active': { transform: 'translateY(-1px)' },
     '&.Mui-disabled': {
         background: 'rgba(212,175,55,0.3)',
         color: 'rgba(0,0,0,0.5)',
+        cursor: 'not-allowed',
+        transform: 'none',
+        boxShadow: 'none',
     },
 };
 
@@ -312,6 +329,7 @@ const CreatePerfumeDialog = ({ open, onClose, onSuccess }) => {
             onClose={handleClose}
             maxWidth="md"
             fullWidth
+            disableScrollLock
             PaperProps={{
                 sx: {
                     background: 'linear-gradient(145deg, #000000 0%, #1a1a1a 100%)',

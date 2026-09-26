@@ -39,7 +39,7 @@ const AdminLogin = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   if (isAuthenticated) {
-    return <Navigate to="/admin-panel/dashboard" replace />;
+    return <Navigate to="/admin-panel/orders" replace />;
   }
 
   const handleInputChange = (e) => {
@@ -64,7 +64,7 @@ const AdminLogin = () => {
         password: ''
       });
 
-      navigate('/admin-panel/dashboard', { replace: true });
+      navigate('/admin-panel/orders', { replace: true });
     } catch (error) {
       handleError(error?.data?.message);
     }

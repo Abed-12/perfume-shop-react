@@ -11,7 +11,9 @@
         "orders": "Orders",
         "customers": "Customers",
         "devices": "Devices",
-        "myOrders": "My Orders"
+        "deliveryFees": "Delivery Fees",
+        "myOrders": "My Orders",
+        "bottomNav": "Bottom Navigation"
     },
     "footer": {
         "brandName": "Perfume Store",
@@ -436,6 +438,31 @@
                 "actions": "Actions"
             },
             "remove": "Remove Device"
+        },
+        "deliveryFees": {
+            "title": "Delivery",
+            "titleHighlight": "Fees",
+            "subtitle": "Control the shipping price per governorate and enable or disable it",
+            "table": {
+                "governorate": "Governorate",
+                "fee": "Fee",
+                "status": "Status",
+                "actions": "Actions"
+            },
+            "active": "Active",
+            "inactive": "Inactive",
+            "currency": "JOD",
+            "empty": "No delivery fees found",
+            "governorate": "Governorate",
+            "editTitle": "Edit Delivery Fee",
+            "feeLabel": "Shipping Fee",
+            "activeLabel": "Delivery enabled for this governorate",
+            "save": "Save",
+            "saved": "Delivery fee saved successfully",
+            "validation": {
+                "priceRequired": "Please enter the shipping fee",
+                "pricePositive": "Shipping fee must be greater than zero"
+            }
         }
     },
     "customer": {
@@ -717,6 +744,176 @@
             "removeDeviceError": "Failed to remove device",
             "notSupported": "Push notifications are not supported in this browser",
             "browserBlocked": "Notifications blocked by browser — click the lock icon in the address bar to enable"
+        }
+    },
+    "page404": {
+        "title": "404",
+        "subtitle": "Oops! This page doesn't exist",
+        "desc": "The page you're looking for may have been moved or no longer exists",
+        "backHome": "Back to Home"
+    },
+    "landing": {
+        "ticker": {
+            "wood": "SANDALWOOD",
+            "calm": "SERENITY",
+            "luxury": "PURE OPULENCE",
+            "moment": "TIMELESS",
+            "organic": "PURE BOTANICALS",
+            "amber": "GOLDEN AMBER",
+            "oud": "AGED ROYAL OUD"
+        },
+        "hero": {
+            "watermark": "PERFUME",
+            "badge": "ROYAL PERFUMERY • HAUTE PARFUMERIE",
+            "title1": "MADE TO",
+            "title2": "STICK IN YOUR MEMORY!",
+            "desc": "A presence that lingers effortlessly, an unforgettable aura crafted from the world's rarest botanical extraits. Designed to accompany your most prestigious moments.",
+            "descEm": "simply choose the fragrance that reflects your essence",
+            "shopNow": "Explore Collection",
+            "loginBtn": "Login",
+            "explore": "Olfactory Pyramid",
+            "scentFinder": "Scent Matchmaker",
+            "pillPurity": "100% Pure Botanical Extracts",
+            "pillLongevity": "Unrivaled 48H+ Longevity & Sillage",
+            "pillDelivery": "Fast Delivery & Royal Gift Box",
+            "scentLabel": "Unique Scents",
+            "notes": "Signature Notes",
+            "n1": "Golden Amber",
+            "n2": "Gardenia Bloom",
+            "n3": "Creamy Sandalwood"
+        },
+        "quiz": {
+            "badge": "FRAGRANCE CONSULTANT",
+            "title": "Find Your Signature Blend in Seconds",
+            "subtitle": "Answer two simple questions to let our fragrance master match your aura",
+            "step1Label": "1. What mood or presence do you desire?",
+            "step2Label": "2. When do you wish to wear this scent most?",
+            "moods": {
+                "royal": "Prestige & Imperial Aura (Aged Oud & Amber)",
+                "romantic": "Poetic & Velvet Softness (White Petals & Vanilla)",
+                "fresh": "Crisp Energy & Radiance (Citrus & Bergamot)",
+                "mysterious": "Alluring Nighttime Mystery (Dark Woods & Warm Spices)"
+            },
+            "times": {
+                "day": "Daytime & Business Sophistication",
+                "night": "Special Evenings & Galas",
+                "all": "Everyday Elegance & Versatility"
+            },
+            "matchResult": "Master Perfumer's Recommendation:",
+            "viewMatch": "View This Fragrance Now"
+        },
+        "collections": {
+            "badge": "EXCLUSIVE COLLECTIONS",
+            "title1": "Discover Timeless",
+            "title2": "Fragrance Selections",
+            "subtitle": "Artfully curated ensembles meeting the highest standards of master perfumery",
+            "c1": { "title": "Noir Velvet", "desc": "Smoky charred woods, mysterious spices, and opulent leather accords." },
+            "c2": { "title": "Golden Muse", "desc": "Solar amber, Madagascan vanilla, and creamy Mysore sandalwood." },
+            "c3": { "title": "Silk Petal", "desc": "A bouquet of rare white blooms, jasmine petals, and luminous white musk." },
+            "c4": { "title": "Royal Imperial", "desc": "Aged Cambodian oud nectar infused with red saffron and royal frankincense." },
+            "shop": "Shop Collection",
+            "viewAll": "View All Collections"
+        },
+        "artistry": {
+            "badge": "PHILOSOPHY OF EXCELLENCE",
+            "title": "Secrets of Pure Extrait Craftsmanship",
+            "subtitle": "Committed to haute perfumery standards that guarantee breathtaking sillage and longevity",
+            "p1Title": "Rare Natural Botanicals",
+            "p1Desc": "We hand-pick the rarest natural essences from the world's finest sources for unmatched purity.",
+            "p2Title": "Slow Artisanal Maceration",
+            "p2Desc": "Aged for months in temperature-controlled vats to achieve transcendent harmony."
+        },
+        "about": {
+            "badge": "ABOUT US",
+            "title1": "More than a perfume,",
+            "title2": "it is a personal signature",
+            "desc": "We create fragrances that become part of your story. From soft morning notes to deep evening blends, every bottle is designed to feel elegant, intimate, and memorable.",
+            "stat1": "Unique Scents",
+            "stat2": "Satisfaction Rate",
+            "stat3": "Happy Customers",
+            "stat4": "Luxury Collections"
+        },
+        "testimonials": {
+            "badge": "ROYAL ACCLAIM",
+            "title": "Voices of Fragrance Connoisseurs",
+            "subtitle": "Authentic words from clients across all governorates",
+            "r1Name": "Faisal Al-Abbadi",
+            "r1Role": "Verified Collector • Amman",
+            "r1Text": "The longevity is extraordinary. Applied in the morning and the trail was radiant through late evening. Exquisite packaging.",
+            "r2Name": "Rania Al-Kurdi",
+            "r2Role": "Verified Client • Irbid",
+            "r2Text": "Silk Petal is pure elegance. The white flowers and velvet musk are soft, royal, and comforting. An irreplaceable signature.",
+            "r3Name": "Dr. Tareq Al-Hneiti",
+            "r3Role": "Verified Client • Zarqa",
+            "r3Text": "The maceration in the oud and amber blends rivals the most prestigious Parisian niche houses. Truly proud of this caliber."
+        },
+        "vip": {
+            "badge": "PRIVATE PRIVILEGE",
+            "title": "Join the Elite Fragrance Circle",
+            "subtitle": "Enjoy 15% off your first acquisition and private early access to reserve releases and bespoke samples",
+            "placeholder": "Enter your email address",
+            "btn": "Join Privilege Club",
+            "success": "Welcome to the circle! A royal welcome gift has been delivered to your inbox."
+        },
+        "guarantees": {
+            "badge": "OUR PLEDGE",
+            "title": "Prestige & Peace of Mind",
+            "g1Title": "100% Authentic Guarantee",
+            "g1Desc": "Pure certified botanical extracts, unadulterated and genuine.",
+            "g2Title": "Express Royal Delivery",
+            "g2Desc": "Carefully packaged with tamper-proof seal in 24-48 hours.",
+            "g3Title": "Complimentary Returns",
+            "g3Desc": "Seamless exchanges and returns ensuring absolute peace of mind.",
+            "g4Title": "Private Concierge Support",
+            "g4Desc": "Fragrance specialists available around the clock to guide your choices."
+        },
+        "cta": {
+            "title": "Ready to find your signature?",
+            "sub": "Browse our curated collections and let a fragrance tell your story and command the room."
+        },
+        "quotes": [
+            "Your scent arrives before you and lingers after you",
+            "True luxury is inhaled, never seen",
+            "Every presence has a signature... this is yours",
+            "One spray is enough to tell your story"
+        ],
+        "craftDuo": {
+            "title": "The Secret of Luxury in a Drop",
+            "subtitle": "Foundations we never compromise in any blend we craft",
+            "card3Title": "Hand-Filled & Inspected",
+            "card3Desc": "Every flacon is filled and inspected by hand before it reaches you"
+        },
+        "ritual": {
+            "title": "Royal Perfuming Rituals",
+            "subtitle": "Four simple touches that multiply your scent's longevity and projection all day",
+            "s1Title": "Neck & Behind the Ears",
+            "s1Desc": "Warm pulse points diffuse the scent with every move",
+            "s2Title": "Wrists Without Rubbing",
+            "s2Desc": "Rubbing crushes aromatic molecules and shortens the scent's life",
+            "s3Title": "Hair & Clothes",
+            "s3Desc": "Fabrics hold fragrance for hours longer than skin",
+            "s4Title": "Mist From Afar",
+            "s4Desc": "Spray from 20 cm away for an even, soft cloud"
+        },
+        "access": {
+            "title": "Guest or Customer? Your Choice",
+            "subtitle": "Browse and order as a guest with no account, or create a free account to unlock coupons and full order history",
+            "guestTitle": "Guest Mode",
+            "guestTag": "No Sign-Up",
+            "guest1": "Browse perfumes and order without an account",
+            "guest2": "Track your order with order number and email",
+            "guest3": "Cancel your order within the allowed window",
+            "guestNoCoupon": "Coupon codes and discounts are customers-only",
+            "guestBtn": "Browse Perfumes",
+            "customerTitle": "Customer Account",
+            "customerTag": "Free • Recommended",
+            "customer1": "Everything guests get — and more",
+            "customer2": "Apply coupon codes and enjoy discounts",
+            "customer3": "Orders you placed as a guest appear in your account after you log in",
+            "customer4": "Track every order status from the My Orders page",
+            "customerCouponEmail": "Coupon codes arrive in your email inbox at any time",
+            "customerBtn": "Create a Free Account",
+            "customerBtnLoggedIn": "Go to My Account"
         }
     }
 }

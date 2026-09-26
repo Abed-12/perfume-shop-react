@@ -12,67 +12,109 @@ import Phone from '@mui/icons-material/Phone';
 import LocationOn from '@mui/icons-material/LocationOn';
 import LocalMall from '@mui/icons-material/LocalMall';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated, selectUserRole } from '../redux/slices/authSlice';
 
 const Footer = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const userRole = useSelector(selectUserRole);
 
   const socialLinks = [
     { icon: <Facebook />, url: '#', label: 'Facebook' },
     { icon: <Instagram />, url: '#', label: 'Instagram' }
   ];
 
-  const quickLinks = [
-    { text: t('footer.home'), url: '#' },
-    { text: t('footer.profile'), url: '#' },
-  ];
+  const getQuickLinks = () => {
+    const links = [{ text: t('navbar.home'), path: '/' }];
+
+    if (!isAuthenticated) {
+      links.push({ text: t('navbar.perfume'), path: '/perfumes' });
+      links.push({ text: t('navbar.register'), path: '/register' });
+      links.push({ text: t('navbar.login'), path: '/login' });
+    } else if (userRole === 'ADMIN') {
+      links.push({ text: t('navbar.perfume'), path: '/admin-panel/perfumes' });
+      links.push({ text: t('navbar.coupon'), path: '/admin-panel/coupon' });
+      links.push({ text: t('navbar.deliveryFees'), path: '/admin-panel/delivery-fees' });
+      links.push({ text: t('navbar.orders'), path: '/admin-panel/orders' });
+      links.push({ text: t('navbar.customers'), path: '/admin-panel/customers' });
+      links.push({ text: t('navbar.devices'), path: '/admin-panel/devices' });
+      links.push({ text: t('navbar.profile'), path: '/admin-panel/profile' });
+    } else if (userRole === 'CUSTOMER') {
+      links.push({ text: t('navbar.perfume'), path: '/perfumes' });
+      links.push({ text: t('navbar.myOrders'), path: '/my-orders' });
+      links.push({ text: t('navbar.profile'), path: '/profile' });
+    }
+
+    return links;
+  };
+
+  const quickLinks = getQuickLinks();
 
   return (
     <Box
       component="footer"
       sx={{
-        background: 'linear-gradient(200deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%)',
+        background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%)',
         color: '#FFFFFF',
         p: 4,
+        pb: 2,
         mt: 'auto',
-        borderTop: '2px solid #D4AF37',
+        position: 'relative',
+        boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.3)',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent 0%, #D4AF37 20%, #F4D03F 50%, #D4AF37 80%, transparent 100%)',
+          backgroundSize: '200% 100%',
+          animation: 'goldShimmer 5s ease-in-out infinite',
+        },
       }}
     >
       <Container maxWidth="xl">
         <Grid container spacing={4}  justifyContent="space-between" columns={12}>
           {/* Brand Section */}
           <Grid sx={{ gridColumn: { xs: 'span 12', md: 'span 4' } }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
               <Box
                 sx={{
                   bgcolor: '#D4AF37',
-                  borderRadius: '12px',
-                  p: 1,
+                  borderRadius: '50%',
+                  width: 38,
+                  height: 38,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
+                  boxShadow: '0 4px 12px rgba(212, 175, 55, 0.4)',
                 }}
               >
-                <LocalMall sx={{ color: '#000000', fontSize: 28 }} />
+                <LocalMall sx={{ color: '#000000', fontSize: 18 }} />
               </Box>
               <Typography
-                variant="h5"
+                variant="h6"
                 sx={{
                   fontWeight: 700,
                   letterSpacing: '0.5px',
                   color: '#D4AF37',
+                  fontSize: '1.1rem',
                 }}
               >
                 {t('footer.brandName')}
               </Typography>
             </Box>
             <Typography
-              variant="body2"
               sx={{
                 mb: 3,
-                opacity: 0.9,
                 lineHeight: 1.7,
                 maxWidth: '350px',
+                fontSize: '0.825rem',
+                fontWeight: 600,
                 color: '#FFFFFF',
               }}
             >
@@ -80,22 +122,25 @@ const Footer = () => {
             </Typography>
 
             {/* Social Media */}
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: 'flex', gap: 1.5 }}>
               {socialLinks.map((social, index) => (
                 <IconButton
                   key={index}
+                  size="small"
                   href={social.url}
                   aria-label={social.label}
                   sx={{
-                    bgcolor: 'rgba(212, 175, 55, 0.1)',
+                    bgcolor: 'rgba(255, 255, 255, 0.05)',
                     color: '#D4AF37',
-                    border: '1px solid rgba(212, 175, 55, 0.3)',
+                    borderRadius: '22px',
+                    border: '1px solid transparent',
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                      bgcolor: '#D4AF37',
-                      color: '#000000',
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 6px 16px rgba(212, 175, 55, 0.4)',
+                      bgcolor: 'rgba(212, 175, 55, 0.15)',
+                      borderColor: '#D4AF37',
+                      color: '#D4AF37',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
                     },
                   }}
                 >
@@ -108,29 +153,30 @@ const Footer = () => {
           {/* Quick Links */}
           <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6', md: 'span 3' } }}>
             <Typography
-              variant="h6"
               sx={{
                 fontWeight: 700,
                 mb: 2,
-                fontSize: '1.1rem',
+                fontSize: '0.875rem',
+                letterSpacing: '0.5px',
                 color: '#D4AF37',
               }}
             >
               {t('footer.quickLinks')}
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: quickLinks.length > 5 ? '1fr 1fr' : '1fr', gap: 1, columnGap: 3 }}>
               {quickLinks.map((link, index) => (
                 <Link
                   key={index}
-                  href={link.url}
+                  onClick={() => navigate(link.path)}
                   sx={{
                     color: '#FFFFFF',
                     textDecoration: 'none',
-                    opacity: 0.9,
+                    fontSize: '0.825rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     display: 'inline-block',
                     '&:hover': {
-                      opacity: 1,
                       transform: 'translateX(5px)',
                       color: '#D4AF37',
                     },
@@ -143,34 +189,34 @@ const Footer = () => {
           </Grid>
 
           {/* Contact Info */}
-          <Grid  sx={{ gridColumn: { xs: 'span 12', sm: 'span 6', md: 'span 4' } }}>
+          <Grid sx={{ gridColumn: { xs: 'span 12', sm: 'span 6', md: 'span 4' } }}>
             <Typography
-              variant="h6"
               sx={{
                 fontWeight: 700,
                 mb: 2,
-                fontSize: '1.1rem',
+                fontSize: '0.875rem',
+                letterSpacing: '0.5px',
                 color: '#D4AF37',
               }}
             >
               {t('footer.contactUs')}
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Email sx={{ fontSize: 20, opacity: 0.9, color: '#D4AF37' }} />
-                <Typography variant="body2" sx={{ opacity: 0.9, color: '#FFFFFF' }}>
+                <Email sx={{ fontSize: 22, color: '#D4AF37' }} />
+                <Typography variant="body2" sx={{ fontSize: '0.825rem', fontWeight: 600, color: '#FFFFFF' }}>
                   perfumeshop.notification@gmail.com
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Phone sx={{ fontSize: 20, opacity: 0.9, color: '#D4AF37' }} />
-                <Typography variant="body2" sx={{ opacity: 0.9, color: '#FFFFFF' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Phone sx={{ fontSize: 22, color: '#D4AF37' }} />
+                <Typography variant="body2" sx={{ fontSize: '0.825rem', fontWeight: 600, color: '#FFFFFF' }}>
                   +962 7 9999 9999
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
-                <LocationOn sx={{ fontSize: 20, opacity: 0.9, color: '#D4AF37' }} />
-                <Typography variant="body2" sx={{ opacity: 0.9, color: '#FFFFFF' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <LocationOn sx={{ fontSize: 22, color: '#D4AF37', flexShrink: 0 }} />
+                <Typography variant="body2" sx={{ fontSize: '0.825rem', fontWeight: 600, color: '#FFFFFF' }}>
                   {t('footer.address')}
                 </Typography>
               </Box>
@@ -182,12 +228,13 @@ const Footer = () => {
           sx={{
             my: 2,
             borderColor: 'rgba(212, 175, 55, 0.3)',
+            borderWidth: 1,
           }}
         />
 
         {/* Bottom Section */}
-        <Box sx={{ textAlign: 'center', py: 2 }}>
-          <Typography variant="body2" sx={{ opacity: 0.8, color: '#FFFFFF' }}>
+        <Box sx={{ textAlign: 'center', py: 0.5 }}>
+          <Typography sx={{ fontSize: '0.8rem', fontWeight: 600, color: '#FFFFFF' }}>
             © {new Date().getFullYear()} {t('footer.brandName')}. {t('footer.copyright')}
           </Typography>
         </Box>

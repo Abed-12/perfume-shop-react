@@ -140,6 +140,7 @@ const CartDrawer = ({ open, onClose }) => {
             PaperProps={{ sx: getDrawerPaperSx(anchor) }}
             ModalProps={{
                 keepMounted: false,
+                disableScrollLock: true,
             }}
         >
             <Box

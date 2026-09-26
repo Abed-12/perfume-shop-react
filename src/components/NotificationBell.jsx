@@ -269,6 +269,7 @@ const NotificationBell = ({ isRTL, liveNotifications = [] }) => {
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
+                disableScrollLock
                 anchorOrigin={{ vertical: 'bottom', horizontal: isRTL ? 'left' : 'right' }}
                 transformOrigin={{ vertical: 'top', horizontal: isRTL ? 'left' : 'right' }}
                 slotProps={{

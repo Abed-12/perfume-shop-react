@@ -56,6 +56,20 @@ export const adminApi = baseApi.injectEndpoints({
             invalidatesTags: ['Coupons']
         }),
 
+        // Delivery Fees
+        getAdminDeliveryFees: builder.query({
+            query: () => '/admin/delivery-fees',
+            providesTags: ['DeliveryFees']
+        }),
+        updateDeliveryFee: builder.mutation({
+            query: ({ id, shippingFee, active }) => ({
+                url: `/admin/delivery-fees/${id}`,
+                method: 'PUT',
+                body: { shippingFee, active }
+            }),
+            invalidatesTags: ['DeliveryFees']
+        }),
+
         // Customer
         getAllCustomers: builder.query({
             query: ({ page = 0, size = 10, email }) => {
@@ -296,6 +310,10 @@ export const {
     useCreateCouponMutation,
     useGetActiveCouponQuery,
     useDeactivateCouponMutation,
+
+    // Delivery Fees
+    useGetAdminDeliveryFeesQuery,
+    useUpdateDeliveryFeeMutation,
 
     // Customers
     useGetAllCustomersQuery,

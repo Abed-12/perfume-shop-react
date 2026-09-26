@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
@@ -177,6 +177,24 @@ const OrderConfirm = () => {
         if (discountType === 'PERCENTAGE') return Math.min((cartTotal * value) / 100, cartTotal);
         return Math.min(value, cartTotal);
     }, [appliedCoupon, cartTotal]);
+
+    // ── Governorates come from the API (active fees only).
+    // While loading, fall back to the static list so the field stays usable.
+    const availableGovernorates = useMemo(() => {
+        if (!deliveryFeesData?.data?.length) return GOVERNORATES;
+        return deliveryFeesData.data.map((item) => item.governorate);
+    }, [deliveryFeesData]);
+
+    // Clear the selection if it is no longer served (e.g. just deactivated)
+    useEffect(() => {
+        if (
+            deliveryFeesData?.data?.length &&
+            delivery.governorate &&
+            !availableGovernorates.includes(delivery.governorate)
+        ) {
+            setDelivery((p) => ({ ...p, governorate: '' }));
+        }
+    }, [deliveryFeesData, availableGovernorates, delivery.governorate]);
 
     const shippingFee = useMemo(() => {
         if (!delivery.governorate || !deliveryFeesData?.data) return 0;
@@ -695,7 +713,7 @@ const OrderConfirm = () => {
                                                                 <MenuItem value="" disabled sx={{ color: 'rgba(255,255,255,0.35)' }}>
                                                                     {t('orderConfirm.governoratePlaceholder')}
                                                                 </MenuItem>
-                                                                {GOVERNORATES.map((gov) => {
+                                                                {availableGovernorates.map((gov) => {
                                                                     const fee = deliveryFeesData?.data?.find(item => item.governorate === gov);
                                                                     const shippingPrice = fee ? formattedNumber(fee.shippingFee) : formattedNumber(0);
                                                                     return (

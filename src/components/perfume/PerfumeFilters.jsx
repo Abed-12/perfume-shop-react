@@ -64,7 +64,7 @@ const PerfumeFilters = ({
             <Box
                 component="form"
                 onSubmit={onSearchSubmit}
-                sx={{ flex: '1 1 300px', minWidth: 250 }}
+                sx={{ flex: { xs: '1 1 100%', sm: '1 1 300px' }, minWidth: { xs: 0, sm: 250 } }}
             >
                 <TextField
                     fullWidth
@@ -90,9 +90,18 @@ const PerfumeFilters = ({
                 />
             </Box>
 
+            {/* Select Filters */}
+            <Box
+                sx={{
+                    display: { xs: 'grid', sm: 'contents' },
+                    gridTemplateColumns: { xs: '1fr 1fr', sm: 'none' },
+                    gap: { xs: 1.5, sm: 0 },
+                    flex: { xs: '1 1 100%', sm: '0 0 auto' },
+                }}
+            >
             {/* Status Filter */}
             {onActiveChange && (
-                <FormControl size="small" sx={{ minWidth: 150 }}>
+                <FormControl size="small" sx={{ minWidth: { xs: 0, sm: 150 } }}>
                     <Select
                         value={active}
                         onChange={(e) => onActiveChange(e.target.value)}
@@ -113,7 +122,7 @@ const PerfumeFilters = ({
             )}
 
             {/* Type Filter */}
-            <FormControl size="small" sx={{ minWidth: 180 }}>
+            <FormControl size="small" sx={{ minWidth: { xs: 0, sm: 180 } }}>
                 <Select
                     value={perfumeType}
                     onChange={(e) => onTypeChange(e.target.value)}
@@ -135,7 +144,7 @@ const PerfumeFilters = ({
             </FormControl>
 
             {/* Season Filter */}
-            <FormControl size="small" sx={{ minWidth: 150 }}>
+            <FormControl size="small" sx={{ minWidth: { xs: 0, sm: 150 } }}>
                 <Select
                     value={perfumeSeason}
                     onChange={(e) => onSeasonChange(e.target.value)}
@@ -156,6 +165,7 @@ const PerfumeFilters = ({
                     <MenuItem value="WINTER">{t('admin.perfume.filter.winter')}</MenuItem>
                 </Select>
             </FormControl>
+            </Box>
 
         </Box>
     );

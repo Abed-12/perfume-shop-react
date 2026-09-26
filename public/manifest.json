@@ -1,15 +1,16 @@
 {
   "short_name": "Perfume Shop",
   "name": "Perfume Shop App",
+  "description": "Luxury perfumes with lasting scents",
   "icons": [
     {
-      "src": "#",
+      "src": "/images/favicon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#050507",
+  "background_color": "#050507"
 }

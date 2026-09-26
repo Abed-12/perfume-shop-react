@@ -453,6 +453,7 @@ const AdminProfile = () => {
                 open={passwordOpen}
                 onClose={handleClosePasswordDialog}
                 disableRestoreFocus={false}
+                disableScrollLock
                 maxWidth="xs"
                 fullWidth
                 PaperProps={{

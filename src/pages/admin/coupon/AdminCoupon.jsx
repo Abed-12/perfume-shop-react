@@ -334,7 +334,7 @@ const AdminCoupon = () => {
                                             </>
                                         )}
                                     </Typography>
-                                    <Box sx={{ width: isRTL ? 250 : 500, height: 3, background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)', mx: 'auto', mt: 1 }} />
+                                    <Box sx={{ width: { xs: 180, sm: 300, md: 420 }, height: 3, borderRadius: '100px', background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #F4D03F 50%, #D4AF37 80%, transparent)', boxShadow: '0 0 12px rgba(212,175,55,0.5)', mx: 'auto', mt: 1.5 }} />
                                 </Box>
                             </Slide>
 
@@ -578,6 +578,7 @@ const AdminCoupon = () => {
                 onClose={() => !isCreating && setCreateDialogOpen(false)}
                 maxWidth="sm"
                 fullWidth
+                disableScrollLock
                 PaperProps={{
                     sx: {
                         background: 'linear-gradient(145deg, #000000 0%, #1a1a1a 100%)',

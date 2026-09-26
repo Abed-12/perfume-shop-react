@@ -745,6 +745,7 @@ const CustomerProfile = () => {
                 open={passwordOpen}
                 onClose={handleClosePasswordDialog}
                 disableRestoreFocus={false}
+                disableScrollLock
                 maxWidth="xs"
                 fullWidth
                 PaperProps={{

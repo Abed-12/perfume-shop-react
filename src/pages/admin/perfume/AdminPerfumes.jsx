@@ -17,16 +17,17 @@ import PerfumeTable from '../../../components/perfume/PerfumeTable';
 import CreatePerfumeDialog from '../../../components/perfume/CreatePerfumeDialog';
 
 const goldBtnSx = {
-    py: { xs: 1, sm: 1.2 },
-    px: { xs: 2, sm: 3 },
+    py: { xs: 0.75, sm: 1.2, md: 1.2 },
+    px: { xs: 1.5, sm: 3, md: 3.5 },
     borderRadius: '10px',
     fontWeight: 700,
     textTransform: 'none',
-    fontSize: { xs: '0.85rem', sm: '0.95rem' },
+    fontSize: { xs: '0.75rem', sm: '0.85rem', md: '0.95rem' },
     background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)',
     color: '#000',
     boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
     transition: 'all 0.3s',
+    whiteSpace: 'nowrap',
     '&:hover': {
         background: 'linear-gradient(135deg, #F4D03F 0%, #D4AF37 100%)',
         transform: 'translateY(-2px)',
@@ -176,8 +177,7 @@ const AdminPerfumes = () => {
                                     onClick={() => setCreateDialogOpen(true)}
                                     sx={{
                                         ...goldBtnSx,
-                                        width: { xs: '100%', sm: 'auto', md: '20%' },
-                                        minWidth: { sm: 'auto' }
+                                        width: { xs: '100%', sm: 'auto' },
                                     }}
                                 >
                                     {t('admin.perfume.addNew')}

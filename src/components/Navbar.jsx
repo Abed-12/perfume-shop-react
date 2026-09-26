@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectIsAuthenticated, selectUserRole } from '../redux/slices/authSlice';
 import AppBar from '@mui/material/AppBar';
@@ -17,7 +17,10 @@ import Container from '@mui/material/Container';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import Switch from '@mui/material/Switch';
 import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -31,6 +34,7 @@ import SpaIcon from '@mui/icons-material/Spa';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import GroupIcon from '@mui/icons-material/Group';
 import DevicesIcon from '@mui/icons-material/Devices';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import CloseIcon from '@mui/icons-material/Close';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -46,8 +50,12 @@ const Navbar = ({ liveNotifications = [] }) => {
   const { t, i18n } = useTranslation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [profileAnchor, setProfileAnchor] = useState(null);
   const [trackOrderOpen, setTrackOrderOpen] = useState(false);
   const [trackOrderParams, setTrackOrderParams] = useState(null);
+  const [bottomNavEnabled, setBottomNavEnabled] = useState(() => {
+    return localStorage.getItem('bottomNavEnabled') !== 'false';
+  });
   const cartCount = useSelector(selectCartCount);
   const formattedCartCount = cartCount > 0 ? new Intl.NumberFormat(i18n.language === 'ar' ? 'ar-JO' : 'en-US').format(cartCount) : undefined;
   const theme = useTheme();
@@ -56,6 +64,7 @@ const Navbar = ({ liveNotifications = [] }) => {
   const isRTL = i18n.language === 'ar';
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const userRole = useSelector(selectUserRole);
   const [searchParams] = useSearchParams();
@@ -84,6 +93,13 @@ const Navbar = ({ liveNotifications = [] }) => {
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
+  };
+
+  // Active route highlight (exact for '/', prefix for the rest)
+  const isActivePath = (path) => {
+    if (!path) return false;
+    if (path === '/') return location.pathname === '/';
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
   const menuItems = [
@@ -117,6 +133,14 @@ const Navbar = ({ liveNotifications = [] }) => {
     },
 
     {
+      text: t('navbar.deliveryFees'),
+      icon: <LocalShippingIcon />,
+      path: '/admin-panel/delivery-fees',
+      roles: ['ADMIN'],
+      requiresAuth: true
+    },
+
+    {
       text: t('navbar.orders'),
       icon: <ReceiptLongIcon />,
       path: '/admin-panel/orders',
@@ -133,33 +157,9 @@ const Navbar = ({ liveNotifications = [] }) => {
     },
 
     {
-      text: t('navbar.devices'),
-      icon: <DevicesIcon />,
-      path: '/admin-panel/devices',
-      roles: ['ADMIN'],
-      requiresAuth: true
-    },
-
-    {
       text: t('navbar.myOrders'),
       icon: <ReceiptLongIcon />,
       path: '/my-orders',
-      roles: ['CUSTOMER'],
-      requiresAuth: true
-    },
-
-    {
-      text: t('navbar.profile'),
-      icon: <PersonIcon />,
-      path: '/admin-panel/profile',
-      roles: ['ADMIN'],
-      requiresAuth: true
-    },
-
-    {
-      text: t('navbar.profile'),
-      icon: <PersonIcon />,
-      path: '/profile',
       roles: ['CUSTOMER'],
       requiresAuth: true
     },
@@ -176,13 +176,6 @@ const Navbar = ({ liveNotifications = [] }) => {
       icon: <LoginIcon />,
       path: '/login',
       requiresAuth: false
-    },
-
-    {
-      text: t('navbar.logout'),
-      icon: <LogoutIcon />,
-      requiresAuth: true,
-      action: handleLogout
     }
   ];
 
@@ -204,17 +197,18 @@ const Navbar = ({ liveNotifications = [] }) => {
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Avatar
-              sx={{
-                bgcolor: '#D4AF37',
-                color: '#000000',
-                width: 40,
-                height: 40,
-                boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
-              }}
-            >
-              <ShoppingIcon sx={{ fontSize: 25 }} /> {/* edit: logo */}
-            </Avatar>
+              <Avatar
+                sx={{
+                  bgcolor: '#0a0a0c',
+                  width: 32,
+                  height: 32,
+                  border: '1.5px solid #D4AF37',
+                  boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)',
+                  '& img': { objectFit: 'contain', padding: '3px' },
+                }}
+                src="/images/favicon.png"
+                alt="logo"
+              />
 
             <Box>
               <Typography
@@ -268,6 +262,7 @@ const Navbar = ({ liveNotifications = [] }) => {
           .map((item, index) => (
             <ListItemButton
               key={index}
+              selected={isActivePath(item.path)}
               onClick={() => {
                 setDrawerOpen(false);
                 if (item.action) item.action();
@@ -285,13 +280,21 @@ const Navbar = ({ liveNotifications = [] }) => {
                   transform: 'translateX(8px)',
                   boxShadow: '0 4px 12px rgba(212, 175, 55, 0.2)',
                 },
+                '&.Mui-selected': {
+                  backgroundColor: 'rgba(212, 175, 55, 0.18)',
+                  boxShadow: '0 0 14px rgba(212, 175, 55, 0.35)',
+                  '&:hover': { backgroundColor: 'rgba(212, 175, 55, 0.25)' },
+                },
               }}
             >
               <ListItemIcon
                 sx={{
-                  color: '#FFFFFF',
+                  color: isActivePath(item.path) ? '#F4D03F' : '#FFFFFF',
                   minWidth: 40,
-                  '& .MuiSvgIcon-root': { fontSize: 24 },
+                  '& .MuiSvgIcon-root': {
+                    fontSize: 24,
+                    filter: isActivePath(item.path) ? 'drop-shadow(0 0 6px rgba(212,175,55,0.8))' : 'none',
+                  },
                 }}
               >
                 {item.icon}
@@ -300,8 +303,8 @@ const Navbar = ({ liveNotifications = [] }) => {
                 primary={item.text}
                 sx={{
                   '& .MuiTypography-root': {
-                    color: '#FFFFFF',
-                    fontWeight: 600,
+                    color: isActivePath(item.path) ? '#F4D03F' : '#FFFFFF',
+                    fontWeight: 700,
                     fontSize: '1rem',
                   },
                 }}
@@ -312,8 +315,32 @@ const Navbar = ({ liveNotifications = [] }) => {
 
       <Divider sx={{ borderColor: 'rgba(212, 175, 55, 0.3)' }} />
 
+      {/* Bottom Nav Toggle */}
+      <Box sx={{ px: 2, pt: 0.5, pb: 0.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Typography sx={{ color: '#FFFFFF', fontWeight: 600, fontSize: '0.85rem' }}>
+          {t('navbar.bottomNav')}
+        </Typography>
+        <Switch
+          checked={bottomNavEnabled}
+          onChange={(e) => {
+            const val = e.target.checked;
+            setBottomNavEnabled(val);
+            localStorage.setItem('bottomNavEnabled', val);
+            window.dispatchEvent(new Event('bottomNavToggle'));
+          }}
+          sx={{
+            '& .MuiSwitch-switchBase.Mui-checked': {
+              color: '#D4AF37',
+            },
+            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+              backgroundColor: '#D4AF37',
+            },
+          }}
+        />
+      </Box>
+
       {/* Language Switcher in Drawer */}
-      <Box sx={{ p: 0.5, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ pt: 0.5, pb: 1, display: 'flex', justifyContent: 'center' }}>
         <LanguageSwitcher isMobile={false} isDrawer />
       </Box>
     </Box>
@@ -325,8 +352,18 @@ const Navbar = ({ liveNotifications = [] }) => {
         position="sticky"
         sx={{
           background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%)',
-          borderBottom: '2px solid #D4AF37',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent 0%, #D4AF37 20%, #F4D03F 50%, #D4AF37 80%, transparent 100%)',
+            backgroundSize: '200% 100%',
+            animation: 'goldShimmer 5s ease-in-out infinite',
+          },
         }}
       >
         <Container maxWidth="xl">
@@ -360,18 +397,22 @@ const Navbar = ({ liveNotifications = [] }) => {
               )}
 
               {/* Brand */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+              <Box
+                onClick={() => navigate('/')}
+                sx={{ display: 'flex', alignItems: 'center', gap: 0.75, cursor: 'pointer' }}
+              >
                 <Avatar
                   sx={{
-                    bgcolor: '#D4AF37',
-                    color: '#000000',
-                    width: { xs: 38, sm: 42 },
-                    height: { xs: 38, sm: 42 },
+                    bgcolor: '#0a0a0c',
+                    width: { xs: 30, sm: 34 },
+                    height: { xs: 30, sm: 34 },
+                    border: '1.5px solid #D4AF37',
                     boxShadow: '0 4px 12px rgba(212, 175, 55, 0.4)',
+                    '& img': { objectFit: 'contain', padding: '3px' },
                   }}
-                >
-                  <ShoppingIcon sx={{ fontSize: { xs: 16, sm: 20 } }} />
-                </Avatar>
+                  src="/images/favicon.png"
+                  alt="logo"
+                />
                 <Typography
                   component="div"
                   sx={{
@@ -411,11 +452,13 @@ const Navbar = ({ liveNotifications = [] }) => {
                         else navigate(item.path);
                       }}
                       sx={{
-                        color: '#FFFFFF',
+                        color: isActivePath(item.path) ? '#F4D03F' : '#FFFFFF',
                         borderRadius: '22px',
                         transition: 'all 0.3s ease',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid transparent',
+                        background: isActivePath(item.path) ? 'rgba(212, 175, 55, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid',
+                        borderColor: isActivePath(item.path) ? '#D4AF37' : 'transparent',
+                        boxShadow: isActivePath(item.path) ? '0 0 14px rgba(212, 175, 55, 0.45)' : 'none',
                         px: isCompact ? 0.75 : 1.25,
                         py: 0.55,
                         gap: isCompact ? 0 : 0.6,
@@ -514,6 +557,109 @@ const Navbar = ({ liveNotifications = [] }) => {
                 </IconButton>
               </Tooltip>
               {!isMobile && <LanguageSwitcher isMobile={isMobile} />}
+              {isAuthenticated && (
+                <>
+                  <Tooltip title={t('navbar.profile')} arrow>
+                    <IconButton
+                      size="small"
+                      onClick={(e) => setProfileAnchor(e.currentTarget)}
+                      sx={{ p: 0.3 }}
+                    >
+                      <Avatar
+                        sx={{
+                          width: 34,
+                          height: 34,
+                          bgcolor: 'rgba(212, 175, 55, 0.12)',
+                          border: '2px solid #D4AF37',
+                          color: '#F4D03F',
+                          boxShadow: '0 0 12px rgba(212, 175, 55, 0.4)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            boxShadow: '0 0 18px rgba(212, 175, 55, 0.7)',
+                            transform: 'scale(1.06)',
+                          },
+                        }}
+                      >
+                        <PersonIcon sx={{ fontSize: 20 }} />
+                      </Avatar>
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    anchorEl={profileAnchor}
+                    open={Boolean(profileAnchor)}
+                    onClose={() => setProfileAnchor(null)}
+                    disableScrollLock
+                    anchorOrigin={{ vertical: 'bottom', horizontal: isRTL ? 'left' : 'right' }}
+                    transformOrigin={{ vertical: 'top', horizontal: isRTL ? 'left' : 'right' }}
+                    PaperProps={{
+                      sx: {
+                        mt: 1.2,
+                        minWidth: 200,
+                        background: 'linear-gradient(145deg, #000000 0%, #1a1a1a 100%)',
+                        border: '1px solid rgba(212, 175, 55, 0.4)',
+                        borderRadius: '14px',
+                        boxShadow: '0 12px 32px rgba(0,0,0,0.6), 0 0 16px rgba(212,175,55,0.15)',
+                        overflow: 'hidden',
+                      },
+                    }}
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        setProfileAnchor(null);
+                        navigate(userRole === 'ADMIN' ? '/admin-panel/profile' : '/profile');
+                      }}
+                      sx={{
+                        color: '#FFFFFF',
+                        fontWeight: 600,
+                        fontSize: '0.88rem',
+                        py: 1.2,
+                        gap: 1.5,
+                        '&:hover': { bgcolor: 'rgba(212, 175, 55, 0.12)', color: '#F4D03F' },
+                      }}
+                    >
+                      <PersonIcon sx={{ fontSize: 20, color: '#D4AF37' }} />
+                      {t('navbar.profile')}
+                    </MenuItem>
+                    {userRole === 'ADMIN' && (
+                      <MenuItem
+                        onClick={() => {
+                          setProfileAnchor(null);
+                          navigate('/admin-panel/devices');
+                        }}
+                        sx={{
+                          color: '#FFFFFF',
+                          fontWeight: 600,
+                          fontSize: '0.88rem',
+                          py: 1.2,
+                          gap: 1.5,
+                          '&:hover': { bgcolor: 'rgba(212, 175, 55, 0.12)', color: '#F4D03F' },
+                        }}
+                      >
+                        <DevicesIcon sx={{ fontSize: 20, color: '#D4AF37' }} />
+                        {t('navbar.devices')}
+                      </MenuItem>
+                    )}
+                    <MenuItem
+                      onClick={() => {
+                        setProfileAnchor(null);
+                        handleLogout();
+                      }}
+                      sx={{
+                        color: '#e74c3c',
+                        fontWeight: 700,
+                        fontSize: '0.88rem',
+                        py: 1.2,
+                        gap: 1.5,
+                        borderTop: '1px solid rgba(212, 175, 55, 0.2)',
+                        '&:hover': { bgcolor: 'rgba(231, 76, 60, 0.1)' },
+                      }}
+                    >
+                      <LogoutIcon sx={{ fontSize: 20 }} />
+                      {t('navbar.logout')}
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
             </Box>
           </Toolbar>
         </Container>
@@ -524,6 +670,7 @@ const Navbar = ({ liveNotifications = [] }) => {
         anchor={isRTL ? "right" : "left"}
         open={drawerOpen}
         onClose={toggleDrawer(false)}
+        ModalProps={{ disableScrollLock: true }}
       >
         {drawerContent}
       </Drawer>

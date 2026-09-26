@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MobileBottomNav from "./components/MobileBottomNav";
+import IntroSplash from "./components/IntroSplash";
+import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import useAdminFcm from "./hooks/useAdminFcm";
 // Admin Pages
@@ -19,6 +21,7 @@ import AdminPerfumeDetails from "./pages/admin/perfume/AdminPerfumeDetails";
 import AdminOrders from "./pages/admin/order/AdminOrders";
 import AdminOrderDetails from "./pages/admin/order/AdminOrderDetails";
 import AdminCustomers from "./pages/admin/customer/AdminCustomers";
+import AdminDeliveryFees from "./pages/admin/delivery/AdminDeliveryFees";
 import AdminDevices from "./pages/admin/device/AdminDevices";
 
 // Customer Pages
@@ -40,6 +43,7 @@ import OrderSuccess from "./pages/order/OrderSuccess";
 
 const App = () => {
   const [liveNotifications, setLiveNotifications] = useState([]);
+  const [showIntro, setShowIntro] = useState(true);
   const addLiveNotification = useCallback((notif) => {
     setLiveNotifications((prev) => [notif, ...prev]);
   }, []);
@@ -48,9 +52,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      {showIntro && <IntroSplash onDone={() => setShowIntro(false)} />}
       <Navbar liveNotifications={liveNotifications} />
 
       <Routes>
+        {/* Landing */}
+        <Route path="/" element={<Landing />} />
+
         {/* Admin */}
         <Route path="/admin-panel/login" element={<AdminLogin />} />
         <Route path="/admin-panel/forgot-password" element={<AdminForgotPassword />} />
@@ -62,6 +70,7 @@ const App = () => {
         <Route path="/admin-panel/orders" element={<AdminRoute><AdminOrders /></AdminRoute>} />
         <Route path="/admin-panel/orders/:orderNumber" element={<AdminRoute><AdminOrderDetails /></AdminRoute>} />
         <Route path="/admin-panel/customers" element={<AdminRoute><AdminCustomers /></AdminRoute>} />
+        <Route path="/admin-panel/delivery-fees" element={<AdminRoute><AdminDeliveryFees /></AdminRoute>} />
         <Route path="/admin-panel/devices" element={<AdminRoute><AdminDevices /></AdminRoute>} />
 
         {/* Customer */}
@@ -84,7 +93,7 @@ const App = () => {
       </Routes>
 
       <Footer />
-      {/* <MobileBottomNav /> */}
+      <MobileBottomNav />
       <ToastContainer />
     </BrowserRouter>
   )

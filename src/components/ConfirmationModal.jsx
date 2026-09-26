@@ -25,6 +25,7 @@ const ConfirmationModal = ({ open, message, onConfirm, onCancel, onClose, confir
             TransitionComponent={Transition}
             maxWidth="sm"
             fullWidth
+            disableScrollLock
             PaperProps={{
                 sx: {
                     borderRadius: '24px',
